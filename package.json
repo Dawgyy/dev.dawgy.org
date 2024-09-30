@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "serve": "next start",
+    "build": "NODE_ENV=production next build",
     "start": "next build && pm2 start npm --name \"dev.dawgy.org\" -- run start",
     "lint": "next lint"
   },
