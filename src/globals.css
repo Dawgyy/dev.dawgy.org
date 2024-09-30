@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Poppins-Regular.woff2') format('woff2'),
+       url('./fonts/Poppins-Regular.woff2') format('woff'),
+}
+
+body {
+  @apply bg-stone-900 text-white;
+}
+
+a {
+  @apply text-blue-300 hover:underline;
+}
+
+h1 {
+  @apply text-4xl font-bold mb-4 text-white;
+}
+
+h2 {
+  @apply text-3xl font-semibold mb-3 text-white;
+}
+
+h3 {
+  @apply text-2xl font-medium mb-2 text-white;
+}
+
+h4, h5, h6 {
+  @apply text-xl font-semibold mb-2 text-white;
+}
+
+p {
+  @apply text-base text-gray-500 leading-relaxed mb-4;
+}
+
+ul, ol {
+  @apply list-disc pl-6 mb-4;
+}
+
+li {
+  @apply mb-2;
+}
+
+blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic text-gray-400 mb-4;
+}
+
+code {
+  @apply bg-gray-800 text-gray-200 px-2 py-1 rounded;
+}
+
+img {
+  @apply max-w-full h-auto rounded-lg mb-4;
+}
+
+table {
+  @apply table-auto w-full mb-4;
+}
+
+th, td {
+  @apply border border-gray-700 px-4 py-2 text-left;
+}
+
+a {
+  text-decoration: underline;
+  color: white;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #63b3ed;
+  color: #63b3ed;
+}
+
+a.active {
+  color: #63b3ed;
+}
+
+a .icon {
+  margin-left: 0.5rem;
+}
+
+button, .link-with-icon {
+  color: white;
+}
+
+button:hover, .link-with-icon:hover {
+  color: #63b3ed;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.navbar-link:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #63b3ed;
+}
+
+.navbar-link-active {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #63b3ed;
+  color: #63b3ed;
+}
