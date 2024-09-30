@@ -20,9 +20,9 @@ interface ExperienceSectionProps {
 export function ExperienceSection({ title, items }: ExperienceSectionProps) {
   return (
     <section>
-      <h2 className="text-2xl font-bold mb-6">{title}</h2>
+      <h3 className="text-2xl font-bold mb-6">{title}</h3>
       {items.map((item, index) => (
-        <div key={index} className="mb-2">
+        <div key={index} className="mb-2 text-xl font-bold">
           <Link href={`/work/${item.slug}`} className="text-lg">
             {item.title}
           </Link>
