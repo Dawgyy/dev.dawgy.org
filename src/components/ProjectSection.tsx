@@ -20,7 +20,7 @@ interface ProjectSectionProps {
 export function ProjectSection({ title, items }: ProjectSectionProps) {
   return (
     <section>
-      <h3 className="text-2xl font-bold mb-6">{title}</h3>
+      <h2 className="text-2xl font-bold mb-6">{title}</h2>
       {items.map((item, index) => (
         <div key={index} className="mb-2">
           <Link href={`/projects/${item.slug}`} className="text-l">
