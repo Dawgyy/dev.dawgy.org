@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next build && next start && pm2 restart dev.dawgy.org || pm2 start npm --name \"dev.dawgy.org\" -- run start",
+    "serve": "next start",
+    "start": "next build && pm2 start npm --name \"dev.dawgy.org\" -- run start",
     "lint": "next lint"
   },
   "dependencies": {
