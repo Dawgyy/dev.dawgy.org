@@ -22,8 +22,8 @@ export function ExperienceSection({ title, items }: ExperienceSectionProps) {
     <section>
       <h3 className="text-2xl font-bold mb-6">{title}</h3>
       {items.map((item, index) => (
-        <div key={index} className="mb-2 text-xl font-bold">
-          <Link href={`/work/${item.slug}`} className="text-lg">
+        <div key={index} className="mb-2">
+          <Link href={`/work/${item.slug}`} className="text-xl font-bold">
             {item.title}
           </Link>
           <p className="m-0 text-blue-300 text-opacity-60">{item.date}</p>
