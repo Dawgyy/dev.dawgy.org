@@ -67,7 +67,7 @@ export function Navbar() {
             className="block navbar-link flex items-center"
           >
             Notes de cours
-            <FontAwesomeIcon icon={faExternalLinkAlt} className="ml-2" />
+            <FontAwesomeIcon icon={faExternalLinkAlt} className="ml-2 w-5 h-5" />
           </a>
         </div>
       )}

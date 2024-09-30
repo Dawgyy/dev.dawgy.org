@@ -51,7 +51,7 @@ export default function BlogPage({ blogPosts }: BlogPageProps) {
             <a href={`/blog/${post.slug}`} className="text-lg font-semibold hover:underline">
               {post.title}
             </a>
-            <p className="text-blue-300 text-opacity-60 m-0">{post.date} • <FontAwesomeIcon icon={faEye} className="text-blue-300 text-opacity-60" /> {views[post.slug] || 0} vues</p>
+            <p className="text-blue-300 text-opacity-60 m-0">{post.date} • <FontAwesomeIcon icon={faEye} className="text-blue-300 text-opacity-60 w-5 h-5" /> {views[post.slug] || 0} vues</p>
             <p className="m-0 text-gray-400">{post.resume}</p>
           </div>
         ))}
