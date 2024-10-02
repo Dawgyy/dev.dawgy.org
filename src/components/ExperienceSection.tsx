@@ -27,7 +27,7 @@ export function ExperienceSection({ title, items }: ExperienceSectionProps) {
             {item.title}
           </Link>
           <p className="m-0 text-blue-300 text-opacity-60">{item.date}</p>
-           <ReactMarkdown className="m-0"
+           <ReactMarkdown className="m-0 text-gray-500"
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
             >
