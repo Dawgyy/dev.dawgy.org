@@ -1,3 +1,4 @@
+import React from 'react';
 import type { AppProps } from 'next/app';
 import '../globals.css';
 import { Navbar } from '../components/Navbar';

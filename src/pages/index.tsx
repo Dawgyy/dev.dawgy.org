@@ -1,3 +1,4 @@
+import React from 'react';
 import { ExperienceSection } from '../components/ExperienceSection';
 import { ProjectSection } from '../components/ProjectSection';
 import { BlogSection } from '../components/BlogSection';
