@@ -37,13 +37,16 @@ export default function BlogDetail({ content, title, slug }: BlogDetailProps) {
 
   return (
     <div className="max-w-container mx-auto px-4 text-white">
-    <Breadcrumb />
+      <Breadcrumb />
       <main className="py-6">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-bold mb-6">{title}</h1>
         </div>
         <div className="mb-4">
-          <FontAwesomeIcon icon={faEye} className="text-blue-300 text-opacity-60 w-5 h-5" />
+          <FontAwesomeIcon
+            icon={faEye}
+            className="text-blue-300 text-opacity-60 w-5 h-5"
+          />
           <span className="text-blue-300 text-opacity-60"> {views} vues</span>
         </div>
         <article className="prose prose-invert">
@@ -73,7 +76,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const filePath = path.join(process.cwd(), 'src/content/blog', `${params.slug}.md`);
+  const filePath = path.join(
+    process.cwd(),
+    'src/content/blog',
+    `${params.slug}.md`,
+  );
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 

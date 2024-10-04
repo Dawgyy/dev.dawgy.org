@@ -1,9 +1,11 @@
 ---
-title: "Crédits de Fin de Stream pour Twitch : Projet Madyann"
-date: "2024-09-28"
+title: 'Crédits de Fin de Stream pour Twitch : Projet Madyann'
+date: '2024-09-28'
 resume: "Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Voir [le repos](https://github.com/Dawgyy/obs-end-credit)"
 ---
+
 [Repository](https://github.com/Dawgyy/obs-end-credit)
+
 ## Introduction
 
 Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Ce projet est conçu pour OBS Studio et utilise des technologies modernes comme TailwindCSS pour rendre le design agréable et dynamique. Dans cet article, nous allons explorer le projet, son fonctionnement, et comment il a été mis en œuvre.

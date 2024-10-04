@@ -1,8 +1,9 @@
 ---
-title: "Projet Intégré"
-date: "2022-2023"
-resume: "Java Spring. Projet de gestion des stages et des évaluations en section infirmier. [Rapport]( https://infohers.dawgy.org/data/OneSpies.pdf)"
+title: 'Projet Intégré'
+date: '2022-2023'
+resume: 'Java Spring. Projet de gestion des stages et des évaluations en section infirmier. [Rapport]( https://infohers.dawgy.org/data/OneSpies.pdf)'
 ---
+
 Java Spring
 Projet de gestion des stages et des évaluations en section infirmier
 

@@ -9,7 +9,7 @@ type ProjectItem = {
   slug: string;
   title: string;
   date?: string;
-  resume: string,
+  resume: string;
 };
 
 interface ProjectSectionProps {
@@ -27,10 +27,11 @@ export function ProjectSection({ title, items }: ProjectSectionProps) {
             {item.title}
           </Link>
           <p className="m-0 text-blue-300 text-opacity-60">{item.date}</p>
-          <ReactMarkdown className="m-0 text-gray-500"
+          <ReactMarkdown
+            className="m-0 text-gray-400"
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
-            >
+          >
             {item.resume}
           </ReactMarkdown>
         </div>

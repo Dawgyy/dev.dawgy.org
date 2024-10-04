@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import View from '../../../models/View';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { slug } = req.query;
 
   console.log('Received request with slug:', slug);
@@ -34,7 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error in API:', error);
-      return res.status(500).json({ message: 'Internal server error', error: error.message });
+      return res
+        .status(500)
+        .json({ message: 'Internal server error', error: error.message });
     } else {
       return res.status(500).json({ message: 'Unknown error occurred' });
     }

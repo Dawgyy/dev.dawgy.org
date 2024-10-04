@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Link from 'next/link';
 
@@ -14,7 +13,6 @@ interface BlogSectionProps {
 }
 
 export function BlogSection({ blogPosts }: BlogSectionProps) {
-
   useEffect(() => {
     const fetchViews = async () => {
       const updatedViews: { [key: string]: number } = {};
@@ -29,25 +27,30 @@ export function BlogSection({ blogPosts }: BlogSectionProps) {
             console.error(`Failed to fetch views for ${post.slug}`, error);
             updatedViews[post.slug] = 0;
           }
-        })
+        }),
       );
     };
 
     fetchViews();
   }, [blogPosts]);
   return (
-  <section className="mt-12">
-  <h3 className="text-2xl font-bold mb-6 text-white">blog</h3>
-  {blogPosts.map((post) => (
-    <div key={post.slug} className="mb-3">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-1">
-        <Link href={`/blog/${post.slug}`} className="text-lg text-white hover:underline">
-          {post.title}
-        </Link>
-        <p className="text-blue-300 text-opacity-60 mt-1 md:mt-0">{post.date}</p>
-      </div>
-    </div>
-  ))}
-</section>
+    <section className="mt-12">
+      <h3 className="text-2xl font-bold mb-6 text-white">blog</h3>
+      {blogPosts.map((post) => (
+        <div key={post.slug} className="mb-3">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-1">
+            <Link
+              href={`/blog/${post.slug}`}
+              className="text-lg text-white hover:underline"
+            >
+              {post.title}
+            </Link>
+            <p className="text-blue-300 text-opacity-60 mt-1 md:mt-0">
+              {post.date}
+            </p>
+          </div>
+        </div>
+      ))}
+    </section>
   );
 }

@@ -6,8 +6,9 @@
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/Poppins-Regular.woff2') format('woff2'),
-       url('./fonts/Poppins-Regular.woff2') format('woff'),
+  src:
+    url('./fonts/Poppins-Regular.woff2') format('woff2'),
+    url('./fonts/Poppins-Regular.woff2') format('woff');
 }
 
 body {
@@ -30,15 +31,18 @@ h3 {
   @apply text-2xl font-medium mb-2 text-white;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   @apply text-xl font-semibold mb-2 text-white;
 }
 
 p {
-  @apply text-base text-white leading-relaxed mb-4;
+  @apply text-base leading-relaxed mb-4;
 }
 
-ul, ol {
+ul,
+ol {
   @apply list-disc pl-6 mb-4;
 }
 
@@ -62,14 +66,17 @@ table {
   @apply table-auto w-full mb-4;
 }
 
-th, td {
+th,
+td {
   @apply border border-gray-700 px-4 py-2 text-left;
 }
 
 a {
   text-decoration: underline;
   color: white;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-decoration-color 0.3s ease;
 }
 
 a:hover {
@@ -87,18 +94,22 @@ a .icon {
   margin-left: 0.5rem;
 }
 
-button, .link-with-icon {
+button,
+.link-with-icon {
   color: white;
 }
 
-button:hover, .link-with-icon:hover {
+button:hover,
+.link-with-icon:hover {
   color: #63b3ed;
 }
 
 .navbar-link {
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-decoration-color 0.3s ease;
 }
 
 .navbar-link:hover {

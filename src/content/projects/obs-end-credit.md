@@ -1,8 +1,9 @@
 ---
-title: "Crédits de Fin de Stream pour Twitch : Projet Madyann"
-date: "2024-09-28"
+title: 'Crédits de Fin de Stream pour Twitch : Projet Madyann'
+date: '2024-09-28'
 resume: "Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Voir [le repos](https://github.com/Dawgyy/obs-end-credit) Voir [la preview](https://madyann.dawgy.org)"
 ---
+
 [Repository](https://github.com/Dawgyy/obs-end-credit)
 Le but principal de ce projet est de créer une scène de fin interactive et élégante, affichant les noms des abonnés et des followers. Cette scène se veut être un moyen de remercier les viewers pour leur soutien en leur donnant un peu de visibilité en direct à la fin de chaque stream.
 

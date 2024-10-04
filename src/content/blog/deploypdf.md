@@ -1,8 +1,9 @@
 ---
-title: "Génération et déploiement automatisés de PDFs sur un VPS"
-date: "2024-09-27"
+title: 'Génération et déploiement automatisés de PDFs sur un VPS'
+date: '2024-09-27'
 resume: "L'automatisation de la génération de fichiers PDF à partir de fichiers Org Mode et LaTeX, suivie de leur déploiement sur un serveur VPS, peut être réalisée en quelques étapes clés. Cela inclut la compilation des fichiers source, la fusion des PDF et la mise en ligne sur le serveur distant via des commandes spécifiques."
 ---
+
 L'automatisation de la génération de fichiers PDF à partir de fichiers Org Mode et LaTeX, suivie de leur déploiement sur un serveur VPS, peut être réalisée en quelques étapes clés. Cela inclut la compilation des fichiers source, la fusion des PDF et la mise en ligne sur le serveur distant via des commandes spécifiques.
 
 ## Étapes du processus

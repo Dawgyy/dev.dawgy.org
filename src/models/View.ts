@@ -23,7 +23,7 @@ View.init(
   {
     sequelize,
     modelName: 'View',
-  }
+  },
 );
 
 // Synchroniser le modèle avec la base de données

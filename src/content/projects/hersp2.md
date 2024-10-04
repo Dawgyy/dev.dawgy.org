@@ -1,5 +1,5 @@
 ---
-title: "Projet Bloc3"
-date: "2024"
-resume: ""
+title: 'Projet Bloc3'
+date: '2024'
+resume: ''
 ---

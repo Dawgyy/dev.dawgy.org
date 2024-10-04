@@ -9,13 +9,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Portfolio de Gerard Alex</title>
-        <meta name="description" content="Gerard Alex, analyste développeur étudiant." />
+        <meta
+          name="description"
+          content="Gerard Alex, analyste développeur étudiant."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
       </Head>
 
       <main className="container lg:max-w-[50%] mx-auto px-1">
-      <Navbar />
+        <Navbar />
         <Component {...pageProps} />
         <Footer />
       </main>
