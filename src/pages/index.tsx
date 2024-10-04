@@ -43,7 +43,7 @@ export default function Home({
               alt="Votre photo"
               width={224}
               height={224}
-              className="w-full h-full object-cover rounded-lg border-4 border-white shadow-lg transform transition-transform duration-300 ease-in-out rotate-90 group-hover:rotate-[96deg]"
+              className="w-full h-full object-cover rounded-lg border-4 border-white shadow-lg transform transition-transform duration-300 ease-in-out group-hover:rotate-[6deg]"
             />
             <div className="absolute inset-0 w-full h-full rounded-lg border-4 border-blue-300 transform rotate-6 pointer-events-none"></div>
             <div className="absolute inset-0 w-full h-full rounded-lg border-4 border-gray-400 transform rotate-12 pointer-events-none -z-10"></div>
