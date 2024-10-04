@@ -20,7 +20,7 @@ L'idée de ce script est simple : recevoir des notifications en fonction du nive
 - Notifications à intervalles réguliers lorsque la batterie descend en dessous d'un seuil.
 - Enregistrement de logs pour chaque événement lié à la batterie, utile pour une future analyse.
 
-[Image du rendu](https://cdn.discordapp.com/attachments/1237149289998712893/1291902358200127508/image.png?ex=6701c954&is=670077d4&hm=a0f7ac298cd792fc4aa59033a366a23b1a976c17b14e9d76d6a988be22753db9&)
+<img src="https://cdn.discordapp.com/attachments/1237149289998712893/1291902358200127508/image.png?ex=6701c954&is=670077d4&hm=a0f7ac298cd792fc4aa59033a366a23b1a976c17b14e9d76d6a988be22753db9&">
 
 ## Le Script
 
