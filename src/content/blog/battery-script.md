@@ -1,30 +1,30 @@
 ---
-title: "Un script bash pour l'état de ma batterie"
+title: 'A Bash Script for My Battery Status'
 date: '2024-10-05'
-resume: "Découvrez comment configurer un script bash simple pour surveiller le niveau de batterie sous Arch Linux, avec des notifications personnalisées et des logs détaillés. Pourquoi utiliser des outils complexes quand vous pouvez tout configurer vous-même, de manière légère et efficace ? Restons fidèles à l'esprit Arch : contrôle total et simplicité."
+resume: 'Discover how to configure a simple bash script to monitor battery level on Arch Linux, with custom notifications and detailed logs. Why use complex tools when you can configure everything yourself, lightly and efficiently? Staying true to the Arch spirit: total control and simplicity.'
 ---
 
 ## Introduction
 
-En tant qu'utilisateur d'Arch Linux, je préfère configurer les choses moi-même plutôt que d'utiliser des paquets préfaits. C'est exactement l'esprit d'Arch : donner la liberté de tout personnaliser, exactement comme vous le souhaitez. Dans cet article, je vais vous présenter un script bash que j'ai créé pour surveiller le niveau de batterie de mon ordinateur.
+As an Arch Linux user, I prefer configuring things myself rather than using pre-made packages. That's exactly the Arch spirit: giving the freedom to customize everything, exactly as you wish. In this article, I will introduce you to a bash script I created to monitor my computer's battery level.
 
-Ce script est un exemple parfait de configuration manuelle et précise, qui répond exactement à mes besoins sans avoir recours à des outils externes lourds et souvent trop complexes.
+This script is a perfect example of manual and precise configuration, which meets exactly my needs without resorting to heavy and often too complex external tools.
 
-## Pourquoi ce Script ?
+## Why This Script?
 
-L'idée de ce script est simple : recevoir des notifications en fonction du niveau de la batterie et de son état (en charge, décharge, pleine). Pourquoi ? Parce que je veux rester informé et garder un contrôle total de la consommation d'énergie sans dépendre des interfaces graphiques ou des paquets trop standards. De plus, cela me permet de personnaliser les seuils de notification comme je le souhaite.
+The idea of this script is simple: receive notifications based on battery level and status (charging, discharging, full). Why? Because I want to stay informed and keep total control over energy consumption without relying on graphical interfaces or overly standard packages. Moreover, it allows me to customize notification thresholds as I wish.
 
-## Fonctionnalités
+## Features
 
-- Notifications basées sur l'état de la batterie (en charge, décharge, pleine).
-- Notifications à intervalles réguliers lorsque la batterie descend en dessous d'un seuil.
-- Enregistrement de logs pour chaque événement lié à la batterie, utile pour une future analyse.
+- Notifications based on battery status (charging, discharging, full).
+- Regular interval notifications when battery drops below a threshold.
+- Logging of every battery-related event, useful for future analysis.
 
 <img src="https://cdn.discordapp.com/attachments/1237149289998712893/1291902358200127508/image.png?ex=6701c954&is=670077d4&hm=a0f7ac298cd792fc4aa59033a366a23b1a976c17b14e9d76d6a988be22753db9&">
 
-## Le Script
+## The Script
 
-Voici le script complet :
+Here is the complete script:
 
 ```bash
 #!/bin/bash
@@ -57,20 +57,20 @@ check_battery() {
     charging_status=$(echo "$battery_info" | grep -oP '(Charging|Discharging|Full)')
 
     if [[ -z "$battery_level" || -z "$charging_status" ]]; then
-        log_event "Erreur : Impossible de récupérer les informations de la batterie."
+        log_event "Error: Unable to retrieve battery information."
         return
     fi
 
     if [[ "$charging_status" != "$previous_charging_status" ]]; then
         if [[ "$charging_status" == "Charging" ]]; then
-            dunstify -u low "L'ordinateur est en charge" "Niveau de la batterie : $battery_level%"
-            log_event "Notification : En charge (Batterie : $battery_level%)"
+            dunstify -u low "Computer is charging" "Battery level: $battery_level%"
+            log_event "Notification: Charging (Battery: $battery_level%)"
         elif [[ "$charging_status" == "Discharging" ]]; then
-            dunstify -u low "L'ordinateur n'est plus en charge" "Niveau de la batterie : $battery_level%"
-            log_event "Notification : Décharge (Batterie : $battery_level%)"
+            dunstify -u low "Computer is no longer charging" "Battery level: $battery_level%"
+            log_event "Notification: Discharging (Battery: $battery_level%)"
         elif [[ "$charging_status" == "Full" ]]; then
-            dunstify -u low "Batterie pleine" "Niveau de la batterie : $battery_level%"
-            log_event "Notification : Batterie pleine (Batterie : $battery_level%)"
+            dunstify -u low "Battery full" "Battery level: $battery_level%"
+            log_event "Notification: Battery full (Battery: $battery_level%)"
         fi
         previous_charging_status="$charging_status"
     fi
@@ -81,8 +81,8 @@ check_battery() {
             if [[ "$battery_level" -le "$CRITICAL_BATTERY_THRESHOLD" ]]; then
                 urgency="critical"
             fi
-            dunstify -u $urgency "Batterie faible" "Niveau de la batterie : $battery_level%"
-            log_event "Avertissement : Batterie faible (Batterie : $battery_level%)"
+            dunstify -u $urgency "Low battery" "Battery level: $battery_level%"
+            log_event "Warning: Low battery (Battery: $battery_level%)"
             previous_battery_level="$battery_level"
         fi
     fi
@@ -96,63 +96,15 @@ while true; do
 done
 ```
 
-## Explication du Code
+## Code Explanation
 
-### Variables Globales
-
-- **CONFIG_FILE** et **LOG_FILE** : Ces fichiers contiennent la configuration de l'utilisateur et les logs d'événements. Ils sont situés dans le répertoire personnel (`$HOME`).
-
-  ```bash
-  CONFIG_FILE="$HOME/.battery_monitor_config"
-  LOG_FILE="$HOME/.battery_monitor.log"
-  ```
-
-- **LOW_BATTERY_THRESHOLD** et **CRITICAL_BATTERY_THRESHOLD** : Les seuils de batterie qui déterminent quand une notification est envoyée (30% pour faible, 10% pour critique).
-
-- **CHECK_INTERVAL** : Intervalle entre chaque vérification du niveau de batterie (10 secondes).
-
-- **NOTIFY_INTERVAL_STEP** : Intervalle de pourcentage à atteindre pour envoyer une nouvelle notification.
-
-### Fonctions
-
-#### `load_config()`
-
-Cette fonction charge un fichier de configuration s'il existe. Cela permet de personnaliser certains paramètres sans modifier directement le script.
-
-#### `log_event(message)`
-
-Cette fonction enregistre des messages avec un horodatage dans un fichier de log. C'est particulièrement utile pour déboguer ou vérifier l'historique des notifications.
-
-#### `check_battery()`
-
-Cette fonction principale vérifie l'état de la batterie en utilisant `acpi`. Elle extrait le niveau de batterie et l'état de charge, puis déclenche les notifications appropriées.
-
-- **Notifications d'état** : En fonction de l'état de charge (`Charging`, `Discharging`, `Full`), une notification est envoyée à l'utilisateur via `dunstify`.
-- **Notifications de batterie faible** : Si le niveau de la batterie descend sous un certain seuil (défini par `LOW_BATTERY_THRESHOLD`), une notification est envoyée, avec une priorité plus élevée si le niveau est critique.
-
-### Boucle Principale
-
-Le script se termine par une boucle `while true` qui appelle `check_battery()` toutes les `CHECK_INTERVAL` secondes. Cela permet de garder un œil constant sur la batterie.
-
-```bash
-while true; do
-    check_battery
-    sleep $CHECK_INTERVAL
-done
-```
-
-## Pourquoi Préférer Cela à un Outil Préfabriqué ?
-
-Il existe plusieurs outils qui fournissent des fonctionnalités similaires, mais les raisons pour lesquelles j'ai préféré créer ce script sont :
-
-1. **Simplicité et contrôle total** : Je sais exactement ce que fait chaque ligne de code. Je peux modifier chaque aspect sans dépendre de fonctionnalités cachées dans des paquets externes.
-
-2. **Performance** : Les outils graphiques peuvent être gourmands en ressources. Ce script est léger et fonctionne en arrière-plan sans alourdir le système.
-
-3. **Personnalisation** : Arch Linux est connu pour la liberté qu'il offre. En configurant tout moi-même, je reste fidèle à l'esprit d'Arch et j'apprends plus sur le fonctionnement interne de mon système.
+1. **Configuration**: The script starts by defining configuration files and thresholds. It tries to load a user configuration file if it exists.
+2. **Logging**: The `log_event` function handles appending timestamped messages to the log file.
+3. **Battery Check**: The core logic is in `check_battery`. It uses `acpi` to get battery status.
+   - It detects state changes (plugged in, unplugged, full) and sends notifications using `dunstify`.
+   - If discharging and below threshold, it sends low battery warnings, escalating urgency as the battery gets lower.
+4. **Loop**: The script runs indefinitely, checking the status every `CHECK_INTERVAL` seconds.
 
 ## Conclusion
 
-Ce script est une façon élégante de garder un contrôle précis sur la batterie de votre ordinateur sous Arch Linux. Il est conçu pour les utilisateurs qui, comme moi, aiment tout configurer eux-mêmes et qui veulent une solution simple et efficace pour surveiller la batterie.
-
-Si vous avez des idées pour améliorer ce script ou souhaitez partager votre propre configuration, n'hésitez pas à commenter et partager !
+This script provides a lightweight and customizable solution for battery monitoring on Arch Linux, adhering to the DIY philosophy.

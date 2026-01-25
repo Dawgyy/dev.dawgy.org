@@ -1,7 +1,8 @@
 ---
-title: 'Bot Discord Python Présence'
+title: 'Discord Presence Python Bot'
 date: '2024'
-resume: 'Bot Python (discord py) permettant de donner ses disponibilités et de gérer des membres pour un événement. Voir [le site](https://discord.com/application-directory/1254138347480289350)'
+resume: 'Python bot (discord.py) allowing members to provide availability and manage event participants. See [the site](https://discord.com/application-directory/1254138347480289350)'
+category: 'Personal'
 ---
 
-Bot Python (discord py) permettant de donner ses disponibilités et de gérer des membres pour un événement. Voir [le site](https://discord.com/application-directory/1254138347480289350)
+Python bot (discord.py) allowing members to provide availability and manage event participants. See [the site](https://discord.com/application-directory/1254138347480289350)

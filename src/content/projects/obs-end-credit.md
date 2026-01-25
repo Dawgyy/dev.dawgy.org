@@ -1,22 +1,23 @@
 ---
-title: 'Crédits de Fin de Stream pour Twitch : Projet Madyann'
+title: 'Twitch Stream End Credits: Madyann Project'
 date: '2024-09-28'
-resume: "Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Voir [le repos](https://github.com/Dawgyy/obs-end-credit) Voir [la preview](https://madyann.dawgy.org)"
+resume: "In the streaming world, recognizing community contributions is essential. We designed a custom end scene for Madyann's Twitch stream to display credits for subscribers and recent followers. See [the repo](https://github.com/Dawgyy/obs-end-credit) See [the preview](https://madyann.dawgy.org)"
+category: 'Personal'
 ---
 
 [Repository](https://github.com/Dawgyy/obs-end-credit)
-Le but principal de ce projet est de créer une scène de fin interactive et élégante, affichant les noms des abonnés et des followers. Cette scène se veut être un moyen de remercier les viewers pour leur soutien en leur donnant un peu de visibilité en direct à la fin de chaque stream.
+The main goal of this project is to create an interactive and elegant end scene, displaying subscriber and follower names. This scene serves as a way to thank viewers for their support by giving them live visibility at the end of each stream.
 
-## Fonctionnalités
+## Features
 
-- **Affichage dynamique des crédits** : Les noms des abonnés (subs) et des followers défilent sur l'écran avec un style élégant et fluide.
-- **Intégration OBS** : La scène est conçue pour être intégrée directement dans OBS Studio, simplifiant ainsi l'ajout de cette scène à la fin des streams.
-- **Utilisation de TailwindCSS** : Pour un style moderne et responsive, TailwindCSS a été utilisé, permettant une personnalisation facile du design et des effets.
-- **Backend Node.js** : Le backend permet de récupérer les informations de Twitch, notamment les abonnés et les followers récents, via l'API de Twitch.
+- **Dynamic Credit Display**: Subscriber (subs) and follower names scroll on the screen with an elegant and fluid style.
+- **OBS Integration**: The scene is designed to be integrated directly into OBS Studio, simplifying the addition of this scene at the end of streams.
+- **TailwindCSS Usage**: For a modern and responsive style, TailwindCSS was used, allowing easy customization of design and effects.
+- **Node.js Backend**: The backend allows retrieving Twitch information, specifically subscribers and recent followers, via the Twitch API.
 
-## Technologies Utilisées
+## Technologies Used
 
-- **Node.js** : Utilisé pour le serveur backend qui interagit avec l'API Twitch.
-- **TailwindCSS** : Pour styliser l'interface de manière rapide et efficace.
-- **JavaScript** : Pour la gestion des animations de défilement et l'interaction avec le backend.
-- **HTML/CSS** : Pour structurer la page affichée dans OBS.
+- **Node.js**: Used for the backend server interacting with the Twitch API.
+- **TailwindCSS**: For fast and efficient interface styling.
+- **JavaScript**: For managing scrolling animations and backend interaction.
+- **HTML/CSS**: For structuring the page displayed in OBS.

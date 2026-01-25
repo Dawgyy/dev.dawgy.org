@@ -1,7 +1,8 @@
 ---
 title: 'Offline Panel'
 date: '2023'
-resume: "Panel en ligne de gestion des planning pour les membres du staff d'un projet Fivem. Voir [le site](https://panel.offline-rp.fr)"
+resume: 'Online panel for staff schedule management of a FiveM project. See [the site](https://panel.offline-rp.fr)'
+category: 'Personal'
 ---
 
-Panel en ligne de gestion des planning pour les membres du staff d'un projet Fivem. Voir [le site](https://panel.offline-rp.fr)
+Online panel for staff schedule management of a FiveM project. See [the site](https://panel.offline-rp.fr)

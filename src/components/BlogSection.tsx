@@ -1,6 +1,6 @@
-import React from 'react';
-import { useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import { Card } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
 
 type BlogPost = {
   slug: string;
@@ -14,44 +14,37 @@ interface BlogSectionProps {
 }
 
 export function BlogSection({ blogPosts }: BlogSectionProps) {
-  useEffect(() => {
-    const fetchViews = async () => {
-      const updatedViews: { [key: string]: number } = {};
-
-      await Promise.all(
-        blogPosts.map(async (post) => {
-          try {
-            const res = await fetch(`/api/view/${post.slug}`);
-            const data = await res.json();
-            updatedViews[post.slug] = data.views || 0;
-          } catch (error) {
-            console.error(`Failed to fetch views for ${post.slug}`, error);
-            updatedViews[post.slug] = 0;
-          }
-        }),
-      );
-    };
-
-    fetchViews();
-  }, [blogPosts]);
   return (
-    <section className="mt-12">
-      <h3 className="text-2xl font-bold mb-6 text-white">blog</h3>
-      {blogPosts.map((post) => (
-        <div key={post.slug} className="mb-3">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-1">
-            <Link
-              href={`/blog/${post.slug}`}
-              className="text-lg text-white hover:underline"
-            >
-              {post.title}
-            </Link>
-            <p className="text-blue-300 text-opacity-60 mt-1 md:mt-0">
-              {post.date}
-            </p>
-          </div>
-        </div>
-      ))}
+    <section className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-2xl font-bold tracking-tight">Blog</h3>
+        <Link
+          to="/blog"
+          className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1"
+        >
+          See all <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+      <div className="grid gap-6">
+        {blogPosts.map((post) => (
+          <Link
+            key={post.slug}
+            to={`/blog/${post.slug}`}
+            className="block group"
+          >
+            <Card className="transition-colors hover:bg-muted/50 border-none shadow-none bg-transparent p-0">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <h4 className="text-lg font-medium group-hover:text-primary transition-colors">
+                  {post.title}
+                </h4>
+                <span className="text-sm text-muted-foreground whitespace-nowrap">
+                  {post.date}
+                </span>
+              </div>
+            </Card>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

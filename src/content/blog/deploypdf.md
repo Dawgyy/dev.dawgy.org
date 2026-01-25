@@ -1,26 +1,26 @@
 ---
-title: 'Génération et déploiement automatisés de PDFs sur un VPS'
+title: 'Automated PDF Generation and Deployment on a VPS'
 date: '2024-09-27'
-resume: "L'automatisation de la génération de fichiers PDF à partir de fichiers Org Mode et LaTeX, suivie de leur déploiement sur un serveur VPS, peut être réalisée en quelques étapes clés. Cela inclut la compilation des fichiers source, la fusion des PDF et la mise en ligne sur le serveur distant via des commandes spécifiques."
+resume: 'Automating PDF generation from Org Mode and LaTeX files, followed by their deployment on a VPS server, can be achieved in a few key steps. This includes compiling source files, merging PDFs, and uploading to the remote server via specific commands.'
 ---
 
-L'automatisation de la génération de fichiers PDF à partir de fichiers Org Mode et LaTeX, suivie de leur déploiement sur un serveur VPS, peut être réalisée en quelques étapes clés. Cela inclut la compilation des fichiers source, la fusion des PDF et la mise en ligne sur le serveur distant via des commandes spécifiques.
+Automating PDF generation from Org Mode and LaTeX files, followed by their deployment on a VPS server, can be achieved in a few key steps. This includes compiling source files, merging PDFs, and uploading to the remote server via specific commands.
 
-## Étapes du processus
+## Process Steps
 
-1. **Compilation des fichiers source**  
-   Les fichiers Org Mode sont d'abord convertis en PDF à l'aide d'Emacs, tandis que les fichiers LaTeX (comme une page de couverture) sont compilés séparément via `pdflatex`. L'exportation de l'Org Mode vers un PDF est gérée par Emacs avec une commande dédiée.
+1. **Compiling Source Files**  
+   Org Mode files are first converted to PDF using Emacs, while LaTeX files (like a cover page) are compiled separately via `pdflatex`. Exporting from Org Mode to PDF is handled by Emacs with a dedicated command.
 
-2. **Fusion des PDFs**  
-   Une fois les fichiers PDF générés, ils sont fusionnés en un seul document. Cet assemblage est réalisé à l'aide de commandes comme `pdftk`, qui permet de combiner le PDF de la page de couverture avec le PDF généré à partir du fichier Org Mode.
+2. **Merging PDFs**  
+   Once PDF files are generated, they are merged into a single document. This assembly is done using commands like `pdftk`, which allows combining the cover page PDF with the PDF generated from the Org Mode file.
 
-3. **Déploiement sur le VPS**  
-   Le fichier PDF final est transféré sur le serveur VPS via `rsync`, un outil performant pour synchroniser des fichiers à distance. Le fichier est ensuite déposé dans un répertoire défini sur le serveur, par exemple, `/var/www/html`. Après le transfert, une commande de redémarrage d'Apache est exécutée pour rendre le PDF accessible en ligne.
+3. **Deployment on the VPS**  
+   The final PDF file is transferred to the VPS server via `rsync`, a powerful tool for synchronizing files remotely. The file is then placed in a defined directory on the server, for example, `/var/www/html`. After the transfer, an Apache restart command is executed to make the PDF accessible online.
 
-4. **Nettoyage des fichiers temporaires**  
-   Une fois les PDFs déployés, les fichiers temporaires générés durant la compilation (fichiers `.aux`, `.log`, etc.) sont supprimés pour maintenir un environnement propre.
+4. **Cleaning Temporary Files**  
+   Once the PDFs are deployed, temporary files generated during compilation (`.aux`, `.log` files, etc.) are deleted to maintain a clean environment.
 
-## Exemple de code
+## Code Example
 
 ```Makefile
 TEX_CMD = pdflatex
@@ -63,4 +63,4 @@ clear:
 
 ```
 
-Ce Makefile permet d'automatiser toutes ces étapes, de la compilation à la mise en ligne, avec des commandes simples et efficaces.
+This Makefile allows automating all these steps, from compilation to online publishing, with simple and efficient commands.

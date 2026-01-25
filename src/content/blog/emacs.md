@@ -1,41 +1,41 @@
 ---
-title: "Pourquoi et comment j'utilise Emacs pour écrire mes notes de cours"
+title: 'Why and How I Use Emacs for Writing Course Notes'
 date: '2024-03-01'
-resume: "Emacs est un outil extensible et personnalisable que j'utilise pour organiser efficacement mes notes de cours. Avec le module Org-mode intégré, je peux structurer mes idées, gérer des documents complexes et produire des fichiers PDF sans difficulté."
+resume: 'Emacs is an extensible and customizable tool that I use to efficiently organize my course notes. With the built-in Org-mode module, I can structure my ideas, manage complex documents, and produce PDF files without difficulty.'
 ---
 
 ## Introduction
 
-Emacs est un outil extensible et personnalisable que j'utilise pour organiser efficacement mes notes de cours. Avec le module **Org-mode** intégré, je peux structurer mes idées, gérer des documents complexes et produire des fichiers PDF sans difficulté.
+Emacs is an extensible and customizable tool that I use to efficiently organize my course notes. With the built-in **Org-mode** module, I can structure my ideas, manage complex documents, and produce PDF files without difficulty.
 
-## Pourquoi j'utilise Emacs ?
+## Why I Use Emacs?
 
-### Flexibilité maximale
+### Maximum Flexibility
 
-Emacs est connu pour sa grande adaptabilité. Chaque aspect de l'éditeur peut être ajusté selon mes besoins spécifiques, qu'il s'agisse de la prise de notes, de la gestion de projets ou de l'écriture de scripts. Cette flexibilité me permet d'avoir un outil unique pour toutes mes tâches académiques.
+Emacs is known for its great adaptability. Every aspect of the editor can be adjusted to my specific needs, whether it's note-taking, project management, or script writing. This flexibility allows me to have a single tool for all my academic tasks.
 
-### Org-mode, un outil puissant
+### Org-mode, A Powerful Tool
 
-L'un des principaux avantages d'Emacs est **Org-mode**, un module spécialement conçu pour organiser les documents. Il permet de créer des sections, des sous-sections et des tâches à accomplir, tout en offrant la possibilité d'exporter mes notes dans différents formats (PDF, HTML, etc.). C'est un outil essentiel pour structurer mes cours.
+One of the main advantages of Emacs is **Org-mode**, a module specifically designed to organize documents. It allows creating sections, subsections, and tasks to do, while offering the ability to export my notes in different formats (PDF, HTML, etc.). It is an essential tool for structuring my courses.
 
-### Intégration avec LaTeX
+### Integration with LaTeX
 
-Pour les cours nécessitant des équations mathématiques ou scientifiques, l'intégration avec LaTeX est extrêmement utile. Cela me permet d'ajouter des formules complexes à mes notes tout en ayant un contrôle total sur leur format. L'export en PDF est ainsi optimisé pour obtenir un rendu professionnel.
+For courses requiring mathematical or scientific equations, integration with LaTeX is extremely useful. This allows me to add complex formulas to my notes while having total control over their format. PDF export is thus optimized to obtain a professional rendering.
 
-## Avantages
+## Advantages
 
-### Organisation claire
+### Clear Organization
 
-Avec Emacs, je peux créer des fichiers pour chaque sujet de cours et suivre les travaux en cours grâce à des TODOs. L'export en PDF avec une table des matières automatique garantit un rendu propre et organisé.
+With Emacs, I can create files for each course subject and track ongoing work with TODOs. PDF export with an automatic table of contents ensures a clean and organized output.
 
-### Gain de temps
+### Time Saving
 
-Grâce à l'automatisation, je peux générer mes fichiers PDF ou organiser mes notes rapidement, sans avoir à jongler entre plusieurs logiciels. Emacs me permet d'exécuter toutes ces tâches efficacement.
+Thanks to automation, I can generate my PDF files or organize my notes quickly, without having to juggle between multiple software programs. Emacs allows me to execute all these tasks efficiently.
 
-### Personnalisation complète
+### Complete Customization
 
-Emacs me donne la possibilité de personnaliser l'apparence et le comportement de l'éditeur selon mes préférences. Cela inclut la mise en forme des documents, l'ajout de fonctionnalités spécifiques ou encore l'ajustement des raccourcis clavier pour gagner en productivité.
+Emacs gives me the possibility to customize the appearance and behavior of the editor according to my preferences. This includes document formatting, adding specific features, or adjusting keyboard shortcuts to gain productivity.
 
 ## Conclusion
 
-Emacs, couplé à **Org-mode**, est l'outil parfait pour la prise de notes de cours. Il offre une flexibilité inégalée et me permet d'organiser mes documents académiques de manière efficace et personnalisée. Si vous recherchez un éditeur polyvalent pour vos études, Emacs est une option à envisager sérieusement.
+Emacs, coupled with **Org-mode**, is the perfect tool for taking course notes. It offers unmatched flexibility and allows me to organize my academic documents efficiently and personalized. If you are looking for a versatile editor for your studies, Emacs is an option to seriously consider.

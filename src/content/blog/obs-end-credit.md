@@ -1,43 +1,43 @@
 ---
-title: 'Crédits de Fin de Stream pour Twitch : Projet Madyann'
+title: 'Twitch Stream End Credits: Madyann Project'
 date: '2024-09-28'
-resume: "Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Voir [le repos](https://github.com/Dawgyy/obs-end-credit)"
+resume: "In the streaming world, recognizing community contributions is essential. We designed a custom end scene for Madyann's Twitch stream to display credits for subscribers and recent followers. See [the repo](https://github.com/Dawgyy/obs-end-credit)"
 ---
 
 [Repository](https://github.com/Dawgyy/obs-end-credit)
 
 ## Introduction
 
-Dans l'univers du streaming, il est essentiel de reconnaître les contributions de sa communauté. Pour cela, nous avons conçu une scène de fin personnalisée pour le stream Twitch de Madyann qui permet d'afficher les crédits des abonnés (subs) et des followers récents. Ce projet est conçu pour OBS Studio et utilise des technologies modernes comme TailwindCSS pour rendre le design agréable et dynamique. Dans cet article, nous allons explorer le projet, son fonctionnement, et comment il a été mis en œuvre.
+In the streaming world, recognizing community contributions is essential. To achieve this, we designed a custom end scene for Madyann's Twitch stream that displays credits for subscribers (subs) and recent followers. This project is designed for OBS Studio and uses modern technologies like TailwindCSS to make the design pleasant and dynamic. In this article, we will explore the project, how it works, and how it was implemented.
 
-## Objectif du Projet
+## Project Goal
 
-Le but principal de ce projet est de créer une scène de fin interactive et élégante, affichant les noms des abonnés et des followers. Cette scène se veut être un moyen de remercier les viewers pour leur soutien en leur donnant un peu de visibilité en direct à la fin de chaque stream.
+The main goal of this project is to create an interactive and elegant end scene displaying the names of subscribers and followers. This scene aims to be a way to thank viewers for their support by giving them some visibility live at the end of each stream.
 
-## Fonctionnalités
+## Features
 
-- **Affichage dynamique des crédits** : Les noms des abonnés (subs) et des followers défilent sur l'écran avec un style élégant et fluide.
-- **Intégration OBS** : La scène est conçue pour être intégrée directement dans OBS Studio, simplifiant ainsi l'ajout de cette scène à la fin des streams.
-- **Utilisation de TailwindCSS** : Pour un style moderne et responsive, TailwindCSS a été utilisé, permettant une personnalisation facile du design et des effets.
-- **Backend Node.js** : Le backend permet de récupérer les informations de Twitch, notamment les abonnés et les followers récents, via l'API de Twitch.
+- **Dynamic Credit Display**: Names of subscribers (subs) and followers scroll across the screen with an elegant and fluid style.
+- **OBS Integration**: The scene is designed to be integrated directly into OBS Studio, simplifying the addition of this scene to the end of streams.
+- **TailwindCSS Usage**: For a modern and responsive style, TailwindCSS was used, allowing for easy customization of design and effects.
+- **Node.js Backend**: The backend allows retrieving information from Twitch, including subscribers and recent followers, via the Twitch API.
 
-## Technologies Utilisées
+## Technologies Used
 
-- **Node.js** : Utilisé pour le serveur backend qui interagit avec l'API Twitch.
-- **TailwindCSS** : Pour styliser l'interface de manière rapide et efficace.
-- **JavaScript** : Pour la gestion des animations de défilement et l'interaction avec le backend.
-- **HTML/CSS** : Pour structurer la page affichée dans OBS.
+- **Node.js**: Used for the backend server that interacts with the Twitch API.
+- **TailwindCSS**: To style the interface quickly and efficiently.
+- **JavaScript**: For managing scrolling animations and interaction with the backend.
+- **HTML/CSS**: To structure the page displayed in OBS.
 
-## Comment ça Fonctionne ?
+## How It Works
 
-1. **Récupération des Données** : Le backend écrit en Node.js récupère les informations sur les abonnés et les followers via l'API Twitch.
-2. **Animation des Crédits** : Les noms récupérés sont ensuite affichés dans la scène de fin sous forme de liste défilante grâce à une animation CSS.
-3. **Intégration dans OBS** : Le fichier HTML est intégré dans OBS Studio en tant que source de navigateur, permettant d'afficher la scène de fin directement dans les streams.
+1. **Data Retrieval**: The backend written in Node.js retrieves information about subscribers and followers via the Twitch API.
+2. **Credit Animation**: The retrieved names are then displayed in the end scene as a scrolling list thanks to CSS animation.
+3. **OBS Integration**: The HTML file is integrated into OBS Studio as a browser source, allowing the end scene to be displayed directly in streams.
 
 # Conclusion
 
-Ce projet de crédits de fin pour le stream Twitch de Madyann est conçu pour être un moyen efficace et visuellement attractif de remercier la communauté. Grâce à l'utilisation de technologies modernes, cette scène de fin permet d'afficher les noms des abonnés et des followers de manière fluide et dynamique. N'hésitez pas à forker le projet, à y apporter des améliorations, ou simplement à l'utiliser pour vos propres streams !
+This end credit project for Madyann's Twitch stream is designed to be an effective and visually attractive way to thank the community. Thanks to the use of modern technologies, this end scene allows displaying subscriber and follower names in a fluid and dynamic way. Feel free to fork the project, make improvements, or simply use it for your own streams!
 
 ---
 
-Merci d'avoir suivi cet article ! Si vous souhaitez voir ce projet en action, connectez-vous sur le stream de Madyann sur Twitch.
+Thank you for following this article! If you want to see this project in action, tune in to Madyann's stream on Twitch.

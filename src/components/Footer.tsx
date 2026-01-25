@@ -1,9 +1,11 @@
-import React from 'react';
 export function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
-    <footer className="mt-12 py-4 border-t border-gray-500 text-sm">
-      <div className="mx-auto max-w-container">
-        <p className="text-gray-400">© 2024 Alex Gerard</p>
+    <footer className="py-6 md:px-8 md:py-0 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+        <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+          © {currentYear} Alex Gerard.
+        </p>
       </div>
     </footer>
   );

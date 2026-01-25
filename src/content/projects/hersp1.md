@@ -1,11 +1,12 @@
 ---
-title: 'Projet Intégré'
+title: 'Integrated Project'
 date: '2022-2023'
-resume: 'Java Spring. Projet de gestion des stages et des évaluations en section infirmier. [Rapport]( https://infohers.dawgy.org/data/OneSpies.pdf)'
+resume: 'Java Spring. Internship and evaluation management project for the nursing section. [Report]( https://infohers.dawgy.org/data/OneSpies.pdf)'
+category: 'Personal'
 ---
 
 Java Spring
-Projet de gestion des stages et des évaluations en section infirmier
+Internship and evaluation management project for the nursing section
 
-- Lien du PDF de remise du projet: https://infohers.dawgy.org/data/OneSpies.pdf
-- Lien du PDF de la présentation du projet: https://infohers.dawgy.org/data/OneSpiesPres.pdf
+- Project submission PDF link: https://infohers.dawgy.org/data/OneSpies.pdf
+- Project presentation PDF link: https://infohers.dawgy.org/data/OneSpiesPres.pdf

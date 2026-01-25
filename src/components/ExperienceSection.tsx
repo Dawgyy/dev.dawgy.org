@@ -1,10 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github-dark.css';
+import { Link } from 'react-router-dom';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 type ExperienceItem = {
   slug: string;
@@ -20,23 +16,38 @@ interface ExperienceSectionProps {
 
 export function ExperienceSection({ title, items }: ExperienceSectionProps) {
   return (
-    <section>
-      <h3 className="text-2xl font-bold mb-6">{title}</h3>
-      {items.map((item, index) => (
-        <div key={index} className="mb-2">
-          <Link href={`/work/${item.slug}`} className="text-xl font-bold">
-            {item.title}
+    <section className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h3 className="text-3xl font-bold tracking-tight">{title}</h3>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+        {items.map((item, index) => (
+          <Link key={index} to={`/work/${item.slug}`} className="block group">
+            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader>
+                <div className="flex justify-between items-start gap-2">
+                  <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
+                    {item.title}
+                  </CardTitle>
+                  {item.date && (
+                    <Badge
+                      variant="secondary"
+                      className="shrink-0 font-normal text-muted-foreground bg-muted/50"
+                    >
+                      {item.date}
+                    </Badge>
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground line-clamp-3 leading-relaxed">
+                  {item.resume}
+                </p>
+              </CardContent>
+            </Card>
           </Link>
-          <p className="m-0 text-blue-300 text-opacity-60">{item.date}</p>
-          <ReactMarkdown
-            className="m-0 text-gray-400"
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, rehypeHighlight]}
-          >
-            {item.resume}
-          </ReactMarkdown>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 }

@@ -2,125 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  src:
-    url('./fonts/Poppins-Regular.woff2') format('woff2'),
-    url('./fonts/Poppins-Regular.woff2') format('woff');
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
 }
 
-body {
-  @apply bg-stone-900 text-white;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground relative overflow-x-hidden;
+  }
+
+  /* Gradient mesh background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(
+        circle at 15% 50%,
+        rgba(76, 29, 149, 0.08),
+        transparent 25%
+      ),
+      radial-gradient(
+        circle at 85% 30%,
+        rgba(56, 189, 248, 0.08),
+        transparent 25%
+      );
+    z-index: -1;
+    pointer-events: none;
+  }
 }
 
-a {
-  @apply text-blue-300 hover:underline;
-}
-
-h1 {
-  @apply text-4xl font-bold mb-4 text-white;
-}
-
-h2 {
-  @apply text-3xl font-semibold mb-3 text-white;
-}
-
-h3 {
-  @apply text-2xl font-medium mb-2 text-white;
-}
-
-h4,
-h5,
-h6 {
-  @apply text-xl font-semibold mb-2 text-white;
-}
-
-p {
-  @apply text-base leading-relaxed mb-4;
-}
-
-ul,
-ol {
-  @apply list-disc pl-6 mb-4;
-}
-
-li {
-  @apply mb-2;
-}
-
-blockquote {
-  @apply border-l-4 border-blue-500 pl-4 italic text-gray-400 mb-4;
-}
-
-code {
-  @apply bg-gray-800 text-gray-200 px-2 py-1 rounded;
-}
-
-img {
-  @apply max-w-full h-auto rounded-lg mb-4;
-}
-
-table {
-  @apply table-auto w-full mb-4;
-}
-
-th,
-td {
-  @apply border border-gray-700 px-4 py-2 text-left;
-}
-
-a {
-  text-decoration: underline;
-  color: white;
-  transition:
-    color 0.3s ease,
-    text-decoration-color 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: #63b3ed;
-  color: #63b3ed;
-}
-
-a.active {
-  color: #63b3ed;
-}
-
-a .icon {
-  margin-left: 0.5rem;
-}
-
-button,
-.link-with-icon {
-  color: white;
-}
-
-button:hover,
-.link-with-icon:hover {
-  color: #63b3ed;
-}
-
-.navbar-link {
-  text-decoration: none;
-  color: white;
-  transition:
-    color 0.3s ease,
-    text-decoration-color 0.3s ease;
-}
-
-.navbar-link:hover {
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: #63b3ed;
-}
-
-.navbar-link-active {
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: #63b3ed;
-  color: #63b3ed;
+@layer utilities {
+  .bg-grid-small-black\/5 {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='8' height='8' fill='none' stroke='rgb(0 0 0 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
+  .bg-grid-small-white\/5 {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='8' height='8' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
 }
