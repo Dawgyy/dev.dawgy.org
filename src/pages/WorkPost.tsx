@@ -3,10 +3,14 @@ import { getContentBySlug } from '@/lib/content';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Building2, Calendar, Briefcase, User, Layers } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-import { pageVariants, pageTransition } from '@/lib/utils';
+import {
+  ArrowLeft,
+  Building2,
+  Calendar,
+  Briefcase,
+  User,
+  Layers,
+} from 'lucide-react';
 
 export default function WorkPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,15 +32,7 @@ export default function WorkPost() {
   }
 
   return (
-    <motion.article
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageVariants}
-      transition={pageTransition}
-      className="container max-w-4xl mx-auto pt-32 pb-20 px-4 md:px-6 w-full min-h-screen"
-      layoutId={`work-${slug}`}
-    >
+    <article className="container max-w-4xl mx-auto pt-32 pb-20 px-4 md:px-6 w-full min-h-screen">
       <div className="rounded-[2.5rem] p-8 md:p-12 bg-white/[0.02] backdrop-blur-[40px] border border-white/5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)]">
         <div className="space-y-6 mb-8">
           <Button
@@ -45,8 +41,8 @@ export default function WorkPost() {
             onClick={() => navigate(-1)}
             className="-ml-4 text-muted-foreground hover:text-foreground scale-90 origin-left rounded-full"
           >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
           </Button>
 
           <div>
@@ -71,8 +67,8 @@ export default function WorkPost() {
               {work.employer || work.company}
             </div>
           </div>
-          
-          {(work.client && work.client !== (work.employer || work.company)) && (
+
+          {work.client && work.client !== (work.employer || work.company) && (
             <div className="space-y-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground/60 font-bold flex items-center gap-1.5">
                 <Briefcase className="h-3.5 w-3.5" /> Client
@@ -93,9 +89,10 @@ export default function WorkPost() {
           </div>
 
           {(work.projectSize || work.sector) && (
-             <div className="space-y-1.5">
+            <div className="space-y-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground/60 font-bold flex items-center gap-1.5">
-                <Layers className="h-3.5 w-3.5" /> {work.projectSize ? 'Size' : 'Sector'}
+                <Layers className="h-3.5 w-3.5" />{' '}
+                {work.projectSize ? 'Size' : 'Sector'}
               </span>
               <div className="text-foreground font-medium pl-5">
                 {work.projectSize || work.sector}
@@ -103,11 +100,11 @@ export default function WorkPost() {
             </div>
           )}
         </div>
+
+        <Separator className="my-8" />
+
+        <MarkdownRenderer content={work.content} />
       </div>
-
-      <Separator className="my-8" />
-
-      <MarkdownRenderer content={work.content} />
-    </motion.article>
+    </article>
   );
 }

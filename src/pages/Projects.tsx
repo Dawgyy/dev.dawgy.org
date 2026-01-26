@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Code, Briefcase, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 export default function Projects({
   category,
@@ -41,7 +40,6 @@ export default function Projects({
   };
 
   const getProjectStyle = () => {
-    // Let BentoGridItem handle the default glassmorphism style
     return '';
   };
 
@@ -66,86 +64,54 @@ export default function Projects({
   );
 
   return (
-    <div
-      className="min-h-screen pt-32 pb-20 px-4 md:px-6 relative w-full"
-    >
+    <div className="min-h-screen pt-32 pb-20 px-4 md:px-6 relative w-full">
       <div className="max-w-7xl mx-auto space-y-8">
         <div className="space-y-6">
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate(-1)}
               className="-ml-4 text-muted-foreground hover:text-foreground scale-90 origin-left rounded-full"
             >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back
             </Button>
-          </motion.div>
+          </div>
           {category ? (
-            <motion.div
-            layoutId={category === 'Professional' ? 'projects-professional' : 'projects-personal'}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-[2.5rem] p-8 ${getGradientClass()} border border-white/5 relative overflow-hidden`}
-          >
-            <div className="relative z-10 flex flex-col justify-end h-full min-h-[10rem]">
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                transition={{ delay: 0.2 }}
-                className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100"
-              >
-                {title}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                transition={{ delay: 0.3 }}
-                className="text-muted-foreground text-lg mt-2 font-medium max-w-xl"
-              >
-                {description}
-              </motion.p>
-            </div>
-            <div className="absolute -right-10 -bottom-10 opacity-10 transform rotate-12 pointer-events-none mix-blend-overlay">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {category === 'Professional' ? (
-                  <Briefcase className="h-80 w-80 text-primary" />
-                ) : (
-                  <Code className="h-80 w-80 text-emerald-500" />
-                )}
-              </motion.div>
-            </div>
-          </motion.div>
-          ) : (
-            <motion.div
-              layoutId="projects-all"
-              className="space-y-2 px-2"
+            <div
+              className={`rounded-[2.5rem] p-8 ${getGradientClass()} border border-white/5 relative overflow-hidden`}
             >
-              <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">{title}</h1>
+              <div className="relative z-10 flex flex-col justify-end h-full min-h-[10rem]">
+                <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
+                  {title}
+                </h1>
+                <p className="text-muted-foreground text-lg mt-2 font-medium max-w-xl">
+                  {description}
+                </p>
+              </div>
+              <div className="absolute -right-10 -bottom-10 opacity-10 transform rotate-12 pointer-events-none mix-blend-overlay">
+                <div>
+                  {category === 'Professional' ? (
+                    <Briefcase className="h-80 w-80 text-primary" />
+                  ) : (
+                    <Code className="h-80 w-80 text-emerald-500" />
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-2 px-2">
+              <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
+                {title}
+              </h1>
               <p className="text-muted-foreground text-lg">{description}</p>
-            </motion.div>
+            </div>
           )}
         </div>
 
         {proProjects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ delay: 0.1 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             {!category && (
               <>
                 <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
@@ -170,21 +136,15 @@ export default function Projects({
                 />
               ))}
             </BentoGrid>
-          </motion.div>
+          </div>
         )}
 
         {personalProjects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             {!category && (
               <>
                 <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
-                  <span className="bg-primary/10 text-primary p-1 rounded-md">
+                  <span className="bg-primary/10 text-emerald-500 p-1 rounded-md">
                     <Code className="h-5 w-5" />
                   </span>{' '}
                   Personal Projects
@@ -205,7 +165,7 @@ export default function Projects({
                 />
               ))}
             </BentoGrid>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>
