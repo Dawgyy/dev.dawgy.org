@@ -25,7 +25,7 @@ export function ProjectSection({ title, items }: ProjectSectionProps) {
             to={`/projects/${item.slug}`}
             className="block group"
           >
-            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
+            <Card className="h-full transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex justify-between items-start gap-2">
                   <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">

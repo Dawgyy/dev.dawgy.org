@@ -3,8 +3,8 @@ import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Code, Briefcase, Globe, Database } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowLeft, Code, Briefcase, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export default function Projects({
@@ -12,6 +12,7 @@ export default function Projects({
 }: {
   category?: 'Professional' | 'Personal';
 }) {
+  const navigate = useNavigate();
   const allProjects = getAllContent('projects') as any[];
 
   let proProjects = allProjects.filter((p) => p.category === 'Professional');
@@ -33,161 +34,180 @@ export default function Projects({
 
   const getGradientClass = () => {
     if (category === 'Professional')
-      return 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/40 dark:to-indigo-900/40';
+      return 'bg-white/[0.02] backdrop-blur-[40px] border border-white/5 shadow-sm';
     if (category === 'Personal')
-      return 'bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/40 dark:to-teal-900/40';
+      return 'bg-white/[0.02] backdrop-blur-[40px] border border-white/5 shadow-sm';
     return '';
   };
 
-  const getLayoutId = () => {
-    if (category === 'Professional') return 'pro-projects-card';
-    if (category === 'Personal') return 'personal-projects-card';
-    return undefined;
-  };
-
-  const getIconLayoutId = () => {
-    if (category === 'Professional') return 'pro-projects-icon';
-    if (category === 'Personal') return 'personal-projects-icon';
-    return undefined;
+  const getProjectStyle = () => {
+    // Let BentoGridItem handle the default glassmorphism style
+    return '';
   };
 
   const ProjectHeader = ({ project }: { project: any }) => (
-    <div className="relative flex flex-1 w-full h-full min-h-[6rem] rounded-[2rem] bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 mb-4 items-center justify-center overflow-hidden group-hover:scale-[1.02] transition-transform duration-300 border border-white/5">
-      <div className="absolute top-3 right-3 z-10">
+    <div className="flex flex-1 w-full h-full min-h-[6rem] items-center justify-center mb-4 group-hover:scale-[1.02] transition-transform duration-500">
+      <div className="absolute top-0 right-0 z-10">
         <Badge
           variant={
             project.category === 'Professional' ? 'default' : 'secondary'
           }
-          className="text-[10px] px-2 py-0.5 shadow-sm"
+          className="text-[10px] px-2.5 py-1 backdrop-blur-md bg-white/5 border border-white/5 text-slate-600 shadow-none font-medium"
         >
           {project.category}
         </Badge>
       </div>
-      <Code className="h-10 w-10 text-muted-foreground/40 group-hover:text-primary/60 transition-colors" />
+      {project.category === 'Professional' ? (
+        <Briefcase className="h-10 w-10 text-slate-300 group-hover:text-blue-500 transition-colors duration-500" />
+      ) : (
+        <Code className="h-10 w-10 text-slate-300 group-hover:text-emerald-500 transition-colors duration-500" />
+      )}
     </div>
   );
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen py-20 px-4 md:px-8 bg-grid-small-black/[0.02] dark:bg-grid-small-white/[0.02] relative"
+    <div
+      className="min-h-screen pt-32 pb-20 px-4 md:px-6 relative w-full"
     >
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div className="space-y-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="-ml-4 text-muted-foreground hover:text-foreground"
+      <div className="max-w-7xl mx-auto space-y-8">
+        <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.3 }}
           >
-            <Link to="/">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to home
-            </Link>
-          </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate(-1)}
+              className="-ml-4 text-muted-foreground hover:text-foreground scale-90 origin-left rounded-full"
+            >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back
+            </Button>
+          </motion.div>
           {category ? (
             <motion.div
-              layoutId={getLayoutId()}
-              className={`rounded-[2.5rem] p-8 ${getGradientClass()} border border-white/5 relative overflow-hidden shadow-2xl`}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            >
-              <div className="relative z-10 flex flex-col justify-end h-full min-h-[10rem]">
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-4xl font-black tracking-tight text-foreground"
-                >
-                  {title}
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-muted-foreground text-lg mt-2 font-medium"
-                >
-                  {description}
-                </motion.p>
-              </div>
-              <div className="absolute -right-10 -bottom-10 opacity-10 transform rotate-12 pointer-events-none">
-                <motion.div layoutId={getIconLayoutId()}>
-                  {category === 'Professional' ? (
-                    <Briefcase className="h-80 w-80 text-primary" />
-                  ) : (
-                    <Code className="h-80 w-80 text-emerald-500" />
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
-          ) : (
-            <div className="space-y-2">
-              <h1 className="text-4xl font-black tracking-tight">{title}</h1>
-              <p className="text-muted-foreground text-lg">{description}</p>
+            layoutId={category === 'Professional' ? 'projects-professional' : 'projects-personal'}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className={`rounded-[2.5rem] p-8 ${getGradientClass()} border border-white/5 relative overflow-hidden`}
+          >
+            <div className="relative z-10 flex flex-col justify-end h-full min-h-[10rem]">
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                transition={{ delay: 0.2 }}
+                className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100"
+              >
+                {title}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                transition={{ delay: 0.3 }}
+                className="text-muted-foreground text-lg mt-2 font-medium max-w-xl"
+              >
+                {description}
+              </motion.p>
             </div>
+            <div className="absolute -right-10 -bottom-10 opacity-10 transform rotate-12 pointer-events-none mix-blend-overlay">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {category === 'Professional' ? (
+                  <Briefcase className="h-80 w-80 text-primary" />
+                ) : (
+                  <Code className="h-80 w-80 text-emerald-500" />
+                )}
+              </motion.div>
+            </div>
+          </motion.div>
+          ) : (
+            <motion.div
+              layoutId="projects-all"
+              className="space-y-2 px-2"
+            >
+              <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">{title}</h1>
+              <p className="text-muted-foreground text-lg">{description}</p>
+            </motion.div>
           )}
         </div>
 
         {proProjects.length > 0 && (
-          <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.1 }}
+            className="space-y-6"
+          >
             {!category && (
               <>
-                <h2 className="text-2xl font-bold flex items-center gap-2">
+                <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
                   <span className="bg-primary/10 text-primary p-1 rounded-md">
                     <Briefcase className="h-5 w-5" />
                   </span>{' '}
                   Professional Projects
                 </h2>
-                <Separator />
+                <Separator className="bg-slate-200/50 dark:bg-slate-700/50" />
               </>
             )}
-            <BentoGrid className="auto-rows-[minmax(200px,auto)]">
-              {proProjects.map((project, i) => (
+            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[20rem] gap-6">
+              {proProjects.map((project) => (
                 <BentoGridItem
                   key={project.slug}
                   title={project.title}
                   description={project.resume}
                   header={<ProjectHeader project={project} />}
                   icon={<Globe className="h-4 w-4 text-neutral-500" />}
-                  className={i === 3 || i === 6 ? 'md:col-span-2' : ''}
+                  className={`col-span-1 ${getProjectStyle()}`}
                   href={`/projects/${project.slug}`}
                 />
               ))}
             </BentoGrid>
-          </div>
+          </motion.div>
         )}
 
         {personalProjects.length > 0 && (
-          <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-6"
+          >
             {!category && (
               <>
-                <h2 className="text-2xl font-bold flex items-center gap-2">
+                <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
                   <span className="bg-primary/10 text-primary p-1 rounded-md">
                     <Code className="h-5 w-5" />
                   </span>{' '}
                   Personal Projects
                 </h2>
-                <Separator />
+                <Separator className="bg-slate-200/50 dark:bg-slate-700/50" />
               </>
             )}
-            <BentoGrid className="auto-rows-[minmax(200px,auto)]">
-              {personalProjects.map((project, i) => (
+            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[20rem] gap-6">
+              {personalProjects.map((project) => (
                 <BentoGridItem
                   key={project.slug}
                   title={project.title}
                   description={project.resume}
                   header={<ProjectHeader project={project} />}
                   icon={<Globe className="h-4 w-4 text-neutral-500" />}
-                  className={i === 3 || i === 6 ? 'md:col-span-2' : ''}
+                  className={`col-span-1 ${getProjectStyle()}`}
                   href={`/projects/${project.slug}`}
                 />
               ))}
             </BentoGrid>
-          </div>
+          </motion.div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

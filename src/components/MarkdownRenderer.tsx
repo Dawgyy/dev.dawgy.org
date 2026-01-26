@@ -16,13 +16,13 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
           h1: ({ node, ...props }) => (
-            <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />
+            <h1 className="text-2xl font-bold mt-8 mb-4" {...props} />
           ),
           h2: ({ node, ...props }) => (
-            <h2 className="text-2xl font-semibold mt-6 mb-3" {...props} />
+            <h2 className="text-1xl font-semibold mt-6 mb-3" {...props} />
           ),
           h3: ({ node, ...props }) => (
-            <h3 className="text-xl font-medium mt-4 mb-2" {...props} />
+            <h3 className="text-lg font-medium mt-4 mb-2" {...props} />
           ),
           p: ({ node, ...props }) => (
             <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />

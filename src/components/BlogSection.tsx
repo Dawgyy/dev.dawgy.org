@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Card } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { Calendar, FileText } from 'lucide-react';
+import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
 
 type BlogPost = {
   slug: string;
@@ -15,36 +14,27 @@ interface BlogSectionProps {
 
 export function BlogSection({ blogPosts }: BlogSectionProps) {
   return (
-    <section className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-bold tracking-tight">Blog</h3>
-        <Link
-          to="/blog"
-          className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1"
-        >
-          See all <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-      <div className="grid gap-6">
-        {blogPosts.map((post) => (
-          <Link
-            key={post.slug}
-            to={`/blog/${post.slug}`}
-            className="block group"
-          >
-            <Card className="transition-colors hover:bg-muted/50 border-none shadow-none bg-transparent p-0">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <h4 className="text-lg font-medium group-hover:text-primary transition-colors">
-                  {post.title}
-                </h4>
-                <span className="text-sm text-muted-foreground whitespace-nowrap">
-                  {post.date}
-                </span>
-              </div>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[20rem] gap-4">
+      {blogPosts.map((post) => (
+        <BentoGridItem
+          key={post.slug}
+          title={post.title}
+          description={post.resume}
+          header={
+            <div className="flex flex-1 w-full h-full min-h-[6rem] items-center justify-center mb-4 group-hover:scale-[1.02] transition-transform duration-500 rounded-3xl bg-white/5 border border-transparent">
+              <FileText className="h-10 w-10 text-slate-300 group-hover:text-blue-500 transition-colors duration-500" />
+            </div>
+          }
+          icon={
+            <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400">
+              <Calendar className="h-3.5 w-3.5" />
+              {post.date}
+            </div>
+          }
+          className="col-span-1"
+          href={`/blog/${post.slug}`}
+        />
+      ))}
+    </BentoGrid>
   );
 }

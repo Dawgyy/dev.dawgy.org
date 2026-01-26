@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
 
 type ExperienceItem = {
   slug: string;
@@ -22,8 +23,9 @@ export function ExperienceSection({ title, items }: ExperienceSectionProps) {
       </div>
       <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
         {items.map((item, index) => (
-          <Link key={index} to={`/work/${item.slug}`} className="block group">
-            <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
+          <Link key={index} to={`/work/${item.slug}`} className="block group h-full">
+            <motion.div layoutId={`work-${item.slug}`} className="h-full">
+            <Card className="h-full transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex justify-between items-start gap-2">
                   <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
@@ -45,6 +47,7 @@ export function ExperienceSection({ title, items }: ExperienceSectionProps) {
                 </p>
               </CardContent>
             </Card>
+            </motion.div>
           </Link>
         ))}
       </div>

@@ -38,8 +38,10 @@ export function getAllContent(
   }
 
   return posts.sort((a, b) => {
-    if (a.date && b.date) {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    const dateA = a.startDate || a.date;
+    const dateB = b.startDate || b.date;
+    if (dateA && dateB) {
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
     }
     return 0;
   });
