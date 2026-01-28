@@ -27,7 +27,7 @@ export function Navbar() {
   ];
 
   const externalLinks = [
-    { href: '/cv.pdf', label: 'CV', icon: FileText },
+    { href: 'https://dev.dawgy.org/cv.pdf', label: 'CV', icon: FileText },
     { href: 'https://infohers.dawgy.org', label: 'Notes', icon: ExternalLink },
   ];
 
