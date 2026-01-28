@@ -10,7 +10,7 @@ export function Layout() {
   const currentOutlet = useOutlet();
 
   return (
-    <div className="relative flex min-h-[100dvh] flex-col overflow-hidden">
+    <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">
       <AmbientBackground />
       <Navbar />
       <main className="flex-1 grid grid-cols-1 grid-rows-1 w-full max-w-[100vw]">

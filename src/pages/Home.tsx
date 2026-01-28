@@ -287,7 +287,7 @@ export default function Home() {
   const educationItems = getAllContent('education') as any[];
 
   return (
-    <div className="pt-[8em] pb-8 px-4 md:px-6 relative w-full h-screen overflow-y-auto scrollbar-hide">
+    <div className="pt-[8em] pb-8 px-4 md:px-6 relative w-full min-h-screen">
       <div className="max-w-7xl mx-auto space-y-8">
         <BentoGrid className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-[20rem]">
           <BentoGridItem
