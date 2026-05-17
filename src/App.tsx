@@ -6,15 +6,11 @@ import BlogPost from './pages/BlogPost';
 import Projects from './pages/Projects';
 import ProjectPost from './pages/ProjectPost';
 import WorkPost from './pages/WorkPost';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <BrowserRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -31,6 +27,7 @@ function App() {
           />
           <Route path="projects/:slug" element={<ProjectPost />} />
           <Route path="work/:slug" element={<WorkPost />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

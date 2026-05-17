@@ -7,13 +7,13 @@ import { pageVariants } from './lib/utils';
 
 export function Layout() {
   const location = useLocation();
-  const currentOutlet = useOutlet();
+  const outlet = useOutlet();
 
   return (
     <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">
       <AmbientBackground />
       <Navbar />
-      <main className="flex-1 grid grid-cols-1 grid-rows-1 w-full max-w-[100vw]">
+      <main className="grid flex-1 grid-cols-1 grid-rows-1">
         <AnimatePresence
           mode="wait"
           initial={false}
@@ -21,13 +21,13 @@ export function Layout() {
         >
           <motion.div
             key={location.pathname}
+            variants={pageVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            variants={pageVariants}
-            className="col-start-1 row-start-1 w-full"
+            className="col-start-1 row-start-1"
           >
-            {currentOutlet}
+            {outlet}
           </motion.div>
         </AnimatePresence>
       </main>

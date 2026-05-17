@@ -1,80 +1,101 @@
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
+
+const socials = [
+  { href: 'https://github.com/Dawgyy', label: 'GitHub', icon: Github },
+  {
+    href: 'https://www.linkedin.com/in/alex-gerard-46b201295/',
+    label: 'LinkedIn',
+    icon: Linkedin,
+  },
+  { href: 'https://x.com/dxwgyy', label: 'X', icon: Twitter },
+  { href: 'mailto:gerardalexpro@gmail.com', label: 'Email', icon: Mail },
+];
+
+const sitemap = [
+  { to: '/', label: 'Home' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/blog', label: 'Blog' },
+];
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer className="w-full border-t border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-xl mt-auto">
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
-          <div className="col-span-1 md:col-span-2 space-y-2">
-            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
-              Alex Gerard
-            </h2>
-            <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
-              Building digital experiences with passion and precision. 
-              Let's create something amazing together.
+    <footer className="relative mt-24 border-t border-border/60">
+      <div className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6">
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
+          <div className="max-w-sm space-y-3">
+            <Link to="/" className="flex items-center gap-2.5">
+              <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 font-bold text-white">
+                A
+              </span>
+              <span className="text-lg font-semibold">Alex Gerard</span>
+            </Link>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              IT Consultant &amp; Developer based in Belgium. Building digital
+              experiences with precision and passion.
             </p>
           </div>
 
-          <div className="space-y-2">
-            <h3 className="font-semibold text-foreground">Sitemap</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-              </li>
-              <li>
-                <Link to="/projects" className="hover:text-primary transition-colors">Projects</Link>
-              </li>
-              <li>
-                <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
-              </li>
-            </ul>
-          </div>
+          <div className="flex gap-16">
+            <nav className="space-y-3">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Navigate
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {sitemap.map((l) => (
+                  <li key={l.to}>
+                    <Link
+                      to={l.to}
+                      className="text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <div className="space-y-2">
-            <h3 className="font-semibold text-foreground">Connect</h3>
-            <div className="flex gap-4">
-              <a 
-                href="https://github.com/Dawgyy" 
-                target="_blank" 
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/alex-gerard-46b201295/" 
-                target="_blank" 
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://x.com/dxwgyy" 
-                target="_blank" 
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a 
-                href="mailto:gerardalexpro@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
+            <div className="space-y-3">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Connect
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {socials.map((s) => (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {s.label}
+                      <ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-muted-foreground">
-          <p>© {currentYear} Alex Gerard. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Made with <span className="text-red-400 animate-pulse">❤</span> and <span className="text-primary font-medium">React</span>
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 sm:flex-row">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Alex Gerard. All rights reserved.
           </p>
+          <div className="flex items-center gap-1.5">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                <s.icon className="size-[18px]" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
