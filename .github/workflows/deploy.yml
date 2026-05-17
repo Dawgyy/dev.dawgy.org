@@ -24,6 +24,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      # SPA fallback: 404.html as the app shell, alongside the
+      # public/.htaccess rewrite — covers Apache and most static hosts.
+      - name: Add SPA fallback
+        run: cp dist/index.html dist/404.html
+
       - name: Copy files to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -31,6 +36,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
-          source: "dist/*"
+          # "dist/**" includes dotfiles like .htaccess; "dist/*" would skip them.
+          source: "dist/**"
           target: "/var/www/dev.dawgy.org"
           strip_components: 1

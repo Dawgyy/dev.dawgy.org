@@ -7,29 +7,26 @@ startDate: '09/2025'
 endDate: 'Present'
 sector: 'Private'
 projectSize: '100 man days'
-resume: 'Application designed to manage consultant timesheet.'
+resume: 'An internal application for consultants to record and manage their timesheets, built end to end on .NET, React and Azure.'
 ---
 
-### Internal Application - Timesheet
+The Timesheet application is an internal Edda International tool for
+tracking consultant time — letting consultants record their hours and the
+team manage and review timesheets.
 
-**Client:** Edda International S.A.
-**Sector:** Private
-**Employer:** Edda International S.A.
-**Project Size:** 100 man days
+## My role
 
-**Project Description:**
-Application designed to manage consultant timesheet.
+I worked on the project end to end:
 
-**Responsibilities:**
-- Analysis
-- Backend
-- Frontend
-- Azure Portal management
+- **Analysis** — shaping the requirements and data model.
+- **Back-end** — building the API and its Azure-hosted services.
+- **Front-end** — implementing the React interface for time entry.
+- **Infrastructure** — managing the application's Azure resources.
 
-**Skills:**
-- Javascript, HTML, CSS, CSS3, HTML5
-- React, React Router
-- Azure, Azure Board, Azure DevOps, Azure AD, Azure Active Directory, Azure Functions, Azure SQL Database, Azure Key Vault, Azure Portal
-- Swagger
-- Microsoft Excel, Microsoft Teams
-- Postman
+## Stack
+
+- **Front-end** — React, React Router, JavaScript, HTML5, CSS3
+- **Platform** — Azure Functions, Azure SQL Database, Azure Key Vault,
+  Azure AD, Azure DevOps &amp; Boards
+- **Integration** — Microsoft Excel, Microsoft Teams
+- **Tooling** — Swagger, Postman

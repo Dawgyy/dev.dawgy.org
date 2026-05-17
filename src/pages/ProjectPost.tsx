@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getContentBySlug } from '@/lib/content';
+import { getContentBySlug, getAdjacent } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
 import NotFound from './NotFound';
 
@@ -30,6 +30,12 @@ export default function ProjectPost() {
     },
   ].filter(Boolean) as { label: string; value: React.ReactNode }[];
 
+  const { prev, next } = getAdjacent(
+    'projects',
+    slug,
+    (p) => p.category === project.category,
+  );
+
   return (
     <ArticleLayout
       eyebrow={project.category === 'Personal' ? 'Personal / 03' : 'Work / 01'}
@@ -37,6 +43,7 @@ export default function ProjectPost() {
       description={project.resume}
       path={`/projects/${slug}`}
       meta={meta}
+      siblings={{ prev, next, base: '/projects' }}
       actions={
         <>
           {project.github && (

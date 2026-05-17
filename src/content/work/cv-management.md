@@ -7,27 +7,25 @@ startDate: '09/2025'
 endDate: 'Present'
 sector: 'Private'
 projectSize: '100 man days'
-resume: 'Application designed to generate resumes from a consultant’s data using various templates.'
+resume: "An internal tool that turns a consultant's profile data into polished resumes, generated on demand from reusable templates."
 ---
 
-### Internal Application - CV Management
+CV Management is an internal Edda International application that turns a
+consultant's profile data into ready-to-send resumes. Rather than editing
+documents by hand, the team picks a template and the app produces a clean,
+consistent CV from structured data.
 
-**Client:** Edda International S.A.
-**Sector:** Private
-**Employer:** Edda International S.A.
-**Project Size:** 100 man days
+## What I built
 
-**Project Description:**
-Application designed to generate resumes from a consultant’s data using various templates.
+- **Dynamic document generation** — a template-based engine that exports
+  resumes as PDF, Word and Excel from the same underlying data.
+- **User data &amp; authentication** — modules to manage consultant profiles
+  and handle access through the company identity provider.
 
-**Responsibilities:**
-- Implemented dynamic document generation (PDF, Word, Excel) using template-based system.
-- Integrated user data management and authentication modules.
+## Stack
 
-**Skills:**
-- Javascript, HTML, CSS, CSS3, HTML5
-- React, React Router
-- .NET, .NET 8, Swagger
-- Azure, Azure DevOps, Azure AD, Azure Active Directory, Azure SQL Database
-- Microsoft Word, Microsoft Excel, Microsoft Teams, Microsoft 365
-- UML, Postman
+- **Front-end** — React, React Router, JavaScript, HTML5, CSS3
+- **Back-end** — .NET 8, Swagger
+- **Platform** — Azure, Azure DevOps, Azure AD, Azure SQL Database
+- **Documents** — Microsoft Word, Excel, Microsoft 365
+- **Tooling** — UML, Postman

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getContentBySlug } from '@/lib/content';
+import { getContentBySlug, getAdjacent } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
 import { useViewCounter } from '@/hooks/use-view-counter';
 import { readingTime } from '@/lib/utils';
@@ -29,6 +29,8 @@ export default function BlogPost() {
     { label: 'Section', value: 'Writing' },
   ].filter(Boolean) as { label: string; value: React.ReactNode }[];
 
+  const { prev, next } = getAdjacent('blog', slug);
+
   return (
     <ArticleLayout
       eyebrow="Writing / 02"
@@ -37,6 +39,7 @@ export default function BlogPost() {
       path={`/blog/${slug}`}
       meta={meta}
       content={post.content}
+      siblings={{ prev, next, base: '/blog' }}
     />
   );
 }

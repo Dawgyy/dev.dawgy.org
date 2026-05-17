@@ -28,23 +28,24 @@
   --accent-glow: oklch(0.74 0.13 205 / 0.16);
 }
 
-/* light variant — kept available via the toggle */
+/* light variant — kept available via the toggle.
+   Text steps tuned to clear WCAG AA contrast on the light surfaces. */
 .light {
-  --bg: oklch(0.98 0.004 230);
-  --bg-2: oklch(0.96 0.005 230);
+  --bg: oklch(0.975 0.004 230);
+  --bg-2: oklch(0.95 0.005 230);
   --surface: oklch(1 0 0);
-  --surface-2: oklch(0.975 0.004 230);
-  --line: oklch(0.2 0.02 230 / 0.1);
-  --line-strong: oklch(0.2 0.02 230 / 0.18);
+  --surface-2: oklch(0.96 0.005 230);
+  --line: oklch(0.2 0.02 230 / 0.12);
+  --line-strong: oklch(0.2 0.02 230 / 0.22);
 
-  --text: oklch(0.22 0.01 230);
-  --text-2: oklch(0.44 0.012 230);
-  --text-3: oklch(0.6 0.012 230);
+  --text: oklch(0.21 0.012 230); /* ~15:1 on --bg */
+  --text-2: oklch(0.42 0.014 230); /* ~7:1  */
+  --text-3: oklch(0.5 0.014 230); /* ~4.7:1 — passes AA */
 
-  --accent: oklch(0.55 0.13 215);
-  --accent-deep: oklch(0.48 0.13 218);
-  --accent-ink: oklch(0.99 0.004 230);
-  --accent-glow: oklch(0.55 0.13 215 / 0.12);
+  --accent: oklch(0.5 0.12 218); /* darker so white ink reads on it */
+  --accent-deep: oklch(0.44 0.12 220);
+  --accent-ink: oklch(1 0 0);
+  --accent-glow: oklch(0.5 0.12 218 / 0.1);
 }
 
 @theme inline {

@@ -47,6 +47,31 @@ export function getAllContent(
   });
 }
 
+/** A lightweight reference to a sibling entry (prev/next navigation). */
+export interface AdjacentEntry {
+  slug: string;
+  title: string;
+}
+
+/**
+ * Returns the entries immediately before and after `slug` in the sorted list,
+ * optionally narrowed by a predicate (e.g. same project category).
+ */
+export function getAdjacent(
+  type: 'blog' | 'projects' | 'work',
+  slug: string,
+  filter?: (c: ContentData) => boolean,
+): { prev: AdjacentEntry | null; next: AdjacentEntry | null } {
+  const list = getAllContent(type).filter(filter ?? (() => true));
+  const i = list.findIndex((c) => c.slug === slug);
+  if (i === -1) return { prev: null, next: null };
+
+  const toRef = (c?: ContentData): AdjacentEntry | null =>
+    c ? { slug: c.slug, title: c.title ?? 'Untitled' } : null;
+
+  return { prev: toRef(list[i - 1]), next: toRef(list[i + 1]) };
+}
+
 export function getContentBySlug(
   type: 'blog' | 'projects' | 'work' | 'education',
   slug: string,

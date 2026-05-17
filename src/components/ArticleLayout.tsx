@@ -2,7 +2,9 @@ import { lazy, Suspense } from 'react';
 import { Shell, Label } from './primitives';
 import { PageHeader } from './PageHeader';
 import { ReadingProgress } from './ReadingProgress';
+import { PrevNext } from './PrevNext';
 import { useSeo } from '@/hooks/use-seo';
+import type { AdjacentEntry } from '@/lib/content';
 
 const MarkdownRenderer = lazy(() =>
   import('./MarkdownRenderer').then((m) => ({ default: m.MarkdownRenderer })),
@@ -36,6 +38,12 @@ interface ArticleLayoutProps {
   meta?: MetaItem[];
   actions?: React.ReactNode;
   content: string;
+  /** Prev/next siblings shown at the foot of the article. */
+  siblings?: {
+    prev: AdjacentEntry | null;
+    next: AdjacentEntry | null;
+    base: string;
+  };
 }
 
 export function ArticleLayout({
@@ -46,6 +54,7 @@ export function ArticleLayout({
   meta,
   actions,
   content,
+  siblings,
 }: ArticleLayoutProps) {
   useSeo({ title, description, path, type: 'article' });
 
@@ -79,6 +88,13 @@ export function ArticleLayout({
         <Suspense fallback={<MarkdownSkeleton />}>
           <MarkdownRenderer content={content} />
         </Suspense>
+        {siblings && (
+          <PrevNext
+            prev={siblings.prev}
+            next={siblings.next}
+            base={siblings.base}
+          />
+        )}
       </div>
     </Shell>
   );

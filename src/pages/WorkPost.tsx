@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getContentBySlug } from '@/lib/content';
+import { getContentBySlug, getAdjacent } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
 import NotFound from './NotFound';
 
@@ -30,6 +30,8 @@ export default function WorkPost() {
     work.projectSize && { label: 'Size', value: work.projectSize },
   ].filter(Boolean) as { label: string; value: React.ReactNode }[];
 
+  const { prev, next } = getAdjacent('work', slug);
+
   return (
     <ArticleLayout
       eyebrow="Work / 01"
@@ -38,6 +40,7 @@ export default function WorkPost() {
       path={`/work/${slug}`}
       meta={meta}
       content={work.content}
+      siblings={{ prev, next, base: '/work' }}
     />
   );
 }
