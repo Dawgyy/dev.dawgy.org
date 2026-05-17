@@ -54,7 +54,7 @@ function template({ eyebrow, title }) {
   const titleSvg = lines
     .map(
       (l, i) =>
-        `<text x="80" y="${300 + i * 96}" font-family="Inter Tight, sans-serif" font-size="84" font-weight="700" fill="${TEXT}">${esc(l)}</text>`,
+        `<text x="80" y="${300 + i * 96}" font-family="Inter" font-weight="700" font-size="84" fill="${TEXT}">${esc(l)}</text>`,
     )
     .join('');
 
@@ -71,26 +71,33 @@ function template({ eyebrow, title }) {
 
   <!-- brand mark -->
   <rect x="80" y="80" width="56" height="56" rx="12" fill="${ACCENT}"/>
-  <text x="108" y="120" font-family="Inter Tight, sans-serif" font-size="32" font-weight="700" fill="${BG}" text-anchor="middle">A</text>
-  <text x="156" y="118" font-family="Inter Tight, sans-serif" font-size="28" font-weight="600" fill="${TEXT}">Alex Gerard</text>
+  <text x="108" y="121" font-family="Inter" font-weight="700" font-size="32" fill="${BG}" text-anchor="middle">A</text>
+  <text x="156" y="119" font-family="Inter" font-weight="600" font-size="28" fill="${TEXT}">Alex Gerard</text>
 
   <!-- eyebrow -->
-  <text x="80" y="210" font-family="JetBrains Mono, monospace" font-size="24" letter-spacing="3" fill="${ACCENT}">${esc(eyebrow.toUpperCase())}</text>
+  <text x="80" y="210" font-family="JetBrains Mono" font-size="24" letter-spacing="3" fill="${ACCENT}">${esc(eyebrow.toUpperCase())}</text>
 
   <!-- title -->
   ${titleSvg}
 
   <!-- footer -->
   <line x1="80" y1="540" x2="1120" y2="540" stroke="${SURFACE}" stroke-width="2"/>
-  <text x="80" y="585" font-family="JetBrains Mono, monospace" font-size="22" fill="${TEXT2}">dev.dawgy.org</text>
-  <text x="1120" y="585" font-family="JetBrains Mono, monospace" font-size="22" fill="${TEXT2}" text-anchor="end">IT Consultant &amp; Developer</text>
+  <text x="80" y="585" font-family="JetBrains Mono" font-size="22" fill="${TEXT2}">dev.dawgy.org</text>
+  <text x="1120" y="585" font-family="JetBrains Mono" font-size="22" fill="${TEXT2}" text-anchor="end">IT Consultant &amp; Developer</text>
 </svg>`;
 }
+
+// Bundled fonts → deterministic rendering regardless of the build host.
+const fontFiles = [
+  join(root, 'scripts/fonts/Inter-Bold.ttf'),
+  join(root, 'scripts/fonts/Inter-SemiBold.ttf'),
+  join(root, 'scripts/fonts/JetBrainsMono-Regular.ttf'),
+];
 
 function render(svg, name) {
   const png = new Resvg(svg, {
     fitTo: { mode: 'width', value: 1200 },
-    font: { loadSystemFonts: true },
+    font: { loadSystemFonts: false, fontFiles, defaultFontFamily: 'Inter' },
   })
     .render()
     .asPng();

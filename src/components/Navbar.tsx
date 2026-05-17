@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shell } from './primitives';
 import { ThemeToggle } from './theme-toggle';
+import { CommandPalette } from './CommandPalette';
 import { cn } from '@/lib/utils';
 
 const nav = [
@@ -84,11 +85,14 @@ export function Navbar() {
             >
               <span className="link-underline">CV</span>
             </Link>
+            <span className="mx-2 h-4 w-px bg-line" />
+            <CommandPalette />
             <ThemeToggle className="ml-1" />
           </nav>
 
           {/* Mobile */}
           <div className="flex items-center gap-1 md:hidden">
+            <CommandPalette />
             <ThemeToggle />
             <button
               type="button"
