@@ -3,7 +3,9 @@ import { getAllContent } from '@/lib/content';
 import { Shell, SectionHead } from '@/components/primitives';
 import { PageHeader } from '@/components/PageHeader';
 import { EntryRow } from '@/components/EntryRow';
+import { TagFilter } from '@/components/TagFilter';
 import { useSeo } from '@/hooks/use-seo';
+import { useTagFilter } from '@/hooks/use-tag-filter';
 import { listVariants } from '@/lib/utils';
 
 /**
@@ -25,6 +27,7 @@ export default function Work() {
   const personal = getAllContent('projects').filter(
     (p) => p.category === 'Personal',
   );
+  const { tags, active, setActive, filtered } = useTagFilter(personal);
 
   return (
     <Shell className="pb-8">
@@ -75,14 +78,15 @@ export default function Work() {
             title="Personal Projects"
             count={personal.length}
           />
+          <TagFilter tags={tags} active={active} onChange={setActive} />
           <motion.div
+            key={active ?? 'all'}
             variants={listVariants}
             initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: '-60px' }}
+            animate="animate"
             className="space-y-2.5"
           >
-            {personal.map((p, i) => (
+            {filtered.map((p, i) => (
               <EntryRow
                 key={p.slug}
                 to={`/projects/${p.slug}`}
@@ -93,6 +97,9 @@ export default function Work() {
                 tags={p.tags}
               />
             ))}
+            {filtered.length === 0 && (
+              <p className="py-12 text-text-2">No projects match this tag.</p>
+            )}
           </motion.div>
         </section>
       )}
