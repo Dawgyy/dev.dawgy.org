@@ -1,12 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Layout';
 import Home from './pages/Home';
 import BlogPage from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import Projects from './pages/Projects';
+import Work from './pages/Work';
 import ProjectPost from './pages/ProjectPost';
 import WorkPost from './pages/WorkPost';
 import About from './pages/About';
+import CV from './pages/CV';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -16,19 +17,22 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="cv" element={<CV />} />
+          <Route path="work" element={<Work />} />
+          <Route path="work/:slug" element={<WorkPost />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPost />} />
-          <Route path="projects" element={<Projects />} />
+          {/* Project detail pages stay; project index folds into /work */}
+          <Route path="projects/:slug" element={<ProjectPost />} />
+          <Route path="projects" element={<Navigate to="/work" replace />} />
           <Route
             path="projects/professional"
-            element={<Projects category="Professional" />}
+            element={<Navigate to="/work" replace />}
           />
           <Route
             path="projects/personal"
-            element={<Projects category="Personal" />}
+            element={<Navigate to="/work" replace />}
           />
-          <Route path="projects/:slug" element={<ProjectPost />} />
-          <Route path="work/:slug" element={<WorkPost />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

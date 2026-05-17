@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { getAllContent } from '@/lib/content';
 import { Shell, Label, SectionHead } from '@/components/primitives';
 import { EntryRow } from '@/components/EntryRow';
+import { RevealText } from '@/components/RevealText';
 import { useSeo } from '@/hooks/use-seo';
 import { listVariants, rowVariants } from '@/lib/utils';
 
@@ -80,17 +81,25 @@ export default function Home() {
           </Label>
         </motion.div>
 
-        <motion.h1
-          variants={rowVariants}
-          className="mt-6 text-[clamp(2.75rem,9vw,5.5rem)] font-semibold leading-[1.0] tracking-[-0.04em]"
-        >
-          Alex Gerard
-          <span className="ml-1 text-accent">.</span>
-          <br />
-          <span className="text-accent-gradient">IT Consultant</span>{' '}
-          <span className="text-text-3">&amp;</span>{' '}
-          <span className="text-text-2">Developer</span>
-        </motion.h1>
+        <RevealText
+          delay={0.15}
+          label="Alex Gerard. IT Consultant & Developer"
+          className="mt-6 text-[clamp(2.75rem,9vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.04em]"
+          lines={[
+            [
+              <>Alex</>,
+              <>
+                Gerard<span className="text-accent">.</span>
+              </>,
+            ],
+            [
+              <span className="text-accent-gradient">IT</span>,
+              <span className="text-accent-gradient">Consultant</span>,
+              <span className="text-text-3">&amp;</span>,
+              <span className="text-text-2">Developer</span>,
+            ],
+          ]}
+        />
 
         <motion.p
           variants={rowVariants}
@@ -140,7 +149,7 @@ export default function Home() {
           {[
             ['Based in', 'Belgium'],
             ['Engagements', String(work.length)],
-            ['Projects', String(projects.length)],
+            ['Projects', String(personal.length)],
             ['Writing', String(writing.length)],
           ].map(([k, v]) => (
             <div key={k} className="bg-surface px-4 py-3.5">

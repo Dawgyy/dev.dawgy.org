@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Shell, Label } from './primitives';
 import { PageHeader } from './PageHeader';
+import { ReadingProgress } from './ReadingProgress';
 import { useSeo } from '@/hooks/use-seo';
 
 const MarkdownRenderer = lazy(() =>
@@ -50,6 +51,7 @@ export function ArticleLayout({
 
   return (
     <Shell className="pb-8">
+      <ReadingProgress />
       <PageHeader
         eyebrow={eyebrow}
         title={title}

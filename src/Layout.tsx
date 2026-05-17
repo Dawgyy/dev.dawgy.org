@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { SpotlightLayer } from './components/spotlight';
+import { ScrollToTop } from './components/ScrollToTop';
 import { pageVariants } from './lib/utils';
 
 /** Static ambient backdrop: soft accent bloom anchored top-centre. */
@@ -39,10 +40,17 @@ export function Layout() {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
+      <ScrollToTop />
+      <a
+        href="#main"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100] focus-visible:rounded-lg focus-visible:bg-accent focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-accent-ink"
+      >
+        Skip to content
+      </a>
       <Backdrop />
       <SpotlightLayer />
       <Navbar />
-      <main className="grid flex-1 grid-cols-1 grid-rows-1">
+      <main id="main" className="grid flex-1 grid-cols-1 grid-rows-1">
         <AnimatePresence
           mode="wait"
           initial={false}

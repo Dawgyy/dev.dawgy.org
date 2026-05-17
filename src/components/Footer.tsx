@@ -13,7 +13,7 @@ const links = [
 
 const pages = [
   { label: 'Index', to: '/' },
-  { label: 'Work', to: '/projects' },
+  { label: 'Work', to: '/work' },
   { label: 'Writing', to: '/blog' },
   { label: 'About', to: '/about' },
 ];
