@@ -1,38 +1,38 @@
+import { Moon, Sun } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from './theme-provider';
 import { cn } from '@/lib/utils';
 
-/**
- * Swiss toggle: a labelled two-state switch (LT / DK), no icons.
- * The active state is filled with ink.
- */
 export function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <div
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       className={cn(
-        'flex select-none border border-rule text-[10px] font-medium',
+        'relative grid size-9 place-items-center rounded-full text-text-3 transition-colors hover:bg-surface-2 hover:text-text',
         className,
       )}
-      role="group"
-      aria-label="Color theme"
     >
-      {(['light', 'dark'] as const).map((mode) => (
-        <button
-          key={mode}
-          type="button"
-          onClick={() => setTheme(mode)}
-          aria-pressed={theme === mode}
-          className={cn(
-            'px-2 py-1 uppercase tracking-wider transition-colors',
-            theme === mode
-              ? 'bg-ink text-paper'
-              : 'text-ink-faint hover:text-ink',
-          )}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
+          transition={{ duration: 0.18 }}
+          className="absolute"
         >
-          {mode === 'light' ? 'Lt' : 'Dk'}
-        </button>
-      ))}
-    </div>
+          {isDark ? (
+            <Moon className="size-[17px]" />
+          ) : (
+            <Sun className="size-[17px]" />
+          )}
+        </motion.span>
+      </AnimatePresence>
+    </button>
   );
 }

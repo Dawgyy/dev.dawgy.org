@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Shell, Grid, Rule, Label } from '@/components/primitives';
+import { ArrowLeft } from 'lucide-react';
+import { Shell, Label } from '@/components/primitives';
 
 export default function NotFound({
   title = 'Page not found',
@@ -9,33 +10,20 @@ export default function NotFound({
   description?: string;
 }) {
   return (
-    <Shell>
-      <div className="pt-14 md:pt-20">
-        <Grid>
-          <div className="col-span-4 md:col-span-12">
-            <Label>Error — 404</Label>
-          </div>
-        </Grid>
-        <Grid className="mt-4 items-end">
-          <h1 className="col-span-4 text-[28vw] font-semibold leading-[0.85] tracking-[-0.04em] text-accent md:col-span-7 md:text-[16rem]">
-            404
-          </h1>
-          <div className="col-span-4 mt-6 self-end md:col-span-4 md:mt-0">
-            <p className="text-2xl font-medium tracking-tight">{title}</p>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              {description}
-            </p>
-            <Link
-              to="/"
-              className="group mt-6 inline-flex items-center gap-1.5 border border-rule-strong px-3 py-1.5 text-sm font-medium"
-            >
-              <span aria-hidden>←</span>
-              <span className="link-underline">Return to index</span>
-            </Link>
-          </div>
-        </Grid>
-        <Rule weight="heavy" className="mt-10" />
-      </div>
+    <Shell className="flex min-h-[70vh] flex-col items-start justify-center">
+      <Label className="text-accent">Error / 404</Label>
+      <p className="mt-4 text-[28vw] font-semibold leading-[0.8] tracking-[-0.04em] text-accent-gradient md:text-[14rem]">
+        404
+      </p>
+      <h1 className="mt-6 text-2xl font-semibold tracking-tight">{title}</h1>
+      <p className="mt-2 max-w-sm text-text-2">{description}</p>
+      <Link
+        to="/"
+        className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.02]"
+      >
+        <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+        Back to index
+      </Link>
     </Shell>
   );
 }

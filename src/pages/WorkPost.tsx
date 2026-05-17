@@ -32,8 +32,7 @@ export default function WorkPost() {
 
   return (
     <ArticleLayout
-      index="01"
-      kind="Work"
+      eyebrow="Work / 01"
       title={work.title ?? 'Untitled'}
       description={work.resume}
       meta={meta}

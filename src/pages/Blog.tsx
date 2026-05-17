@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getAllContent } from '@/lib/content';
 import { Shell } from '@/components/primitives';
 import { PageHeader } from '@/components/PageHeader';
-import { listVariants, rowVariants } from '@/lib/utils';
+import { EntryRow } from '@/components/EntryRow';
+import { listVariants } from '@/lib/utils';
 
 export default function Blog() {
   const posts = getAllContent('blog');
 
   return (
-    <Shell>
+    <Shell className="pb-8">
       <PageHeader
-        index="02"
+        eyebrow="Index / 02"
         title="Writing"
         description="Notes on development, tooling, and the craft of building software."
       />
@@ -20,36 +20,21 @@ export default function Blog() {
         variants={listVariants}
         initial="initial"
         animate="animate"
-        className="pt-2"
+        className="mt-10 space-y-2.5"
       >
         {posts.map((post, i) => (
-          <motion.div key={post.slug} variants={rowVariants}>
-            <Link
-              to={`/blog/${post.slug}`}
-              className="group grid grid-cols-4 gap-x-5 border-b border-rule py-7 md:grid-cols-12 md:gap-x-6"
-            >
-              <span className="nums col-span-1 text-xs text-ink-faint group-hover:text-accent">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div className="col-span-3 md:col-span-8">
-                <h2 className="link-underline inline text-2xl font-medium tracking-tight md:text-3xl">
-                  {post.title}
-                </h2>
-                {post.resume && (
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
-                    {post.resume}
-                  </p>
-                )}
-              </div>
-              <span className="label col-span-4 col-start-2 mt-3 md:col-span-3 md:col-start-10 md:mt-1 md:text-right">
-                {post.date}
-              </span>
-            </Link>
-          </motion.div>
+          <EntryRow
+            key={post.slug}
+            to={`/blog/${post.slug}`}
+            index={String(i + 1).padStart(2, '0')}
+            title={post.title ?? 'Untitled'}
+            caption={post.resume}
+            meta={post.date}
+          />
         ))}
 
         {posts.length === 0 && (
-          <p className="py-20 text-ink-soft">Nothing published yet.</p>
+          <p className="py-20 text-text-2">Nothing published yet.</p>
         )}
       </motion.div>
     </Shell>

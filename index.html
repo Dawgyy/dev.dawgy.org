@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f7f4" />
+    <meta name="theme-color" content="#1b1d20" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,12 +26,15 @@
     />
     <meta property="og:type" content="website" />
     <script>
+      // Dark is the default; only opt in to light.
       (function () {
         try {
           var t = localStorage.getItem('theme');
-          var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (t === 'dark' || (!t && d)) {
-            document.documentElement.classList.add('dark');
+          var prefersLight = window.matchMedia(
+            '(prefers-color-scheme: light)',
+          ).matches;
+          if (t === 'light' || (!t && prefersLight)) {
+            document.documentElement.classList.add('light');
           }
         } catch (e) {}
       })();

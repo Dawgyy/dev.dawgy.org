@@ -1,47 +1,58 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getAllContent } from '@/lib/content';
-import { Shell, Grid, Rule, Label, SectionHead } from '@/components/primitives';
+import { Shell, Label, SectionHead } from '@/components/primitives';
+import { EntryRow } from '@/components/EntryRow';
 import { listVariants, rowVariants } from '@/lib/utils';
 
-/* ---- Index row: a single line item with index / title / meta ---- */
-function IndexRow({
-  to,
+const stack = ['.NET', 'C#', 'React', 'TypeScript', 'Azure', 'SQL', 'TanStack'];
+
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/Dawgyy' },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/alex-gerard-46b201295/',
+  },
+  { label: 'X', href: 'https://x.com/dxwgyy' },
+];
+
+function IndexSection({
   index,
   title,
-  meta,
-  caption,
+  items,
+  hrefBase,
 }: {
-  to: string;
   index: string;
   title: string;
-  meta?: string;
-  caption?: string;
+  hrefBase: string;
+  items: ReturnType<typeof getAllContent>;
 }) {
+  if (items.length === 0) return null;
   return (
-    <motion.div variants={rowVariants}>
-      <Link
-        to={to}
-        className="group grid grid-cols-4 items-baseline gap-x-5 border-b border-rule py-4 md:grid-cols-12 md:gap-x-6"
+    <section className="mt-16">
+      <SectionHead index={index} title={title} count={items.length} />
+      <motion.div
+        variants={listVariants}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, margin: '-80px' }}
+        className="space-y-2.5"
       >
-        <span className="nums col-span-1 text-xs text-ink-faint group-hover:text-accent">
-          {index}
-        </span>
-        <span className="col-span-3 md:col-span-5">
-          <span className="link-underline text-lg font-medium tracking-tight md:text-xl">
-            {title}
-          </span>
-        </span>
-        {caption && (
-          <span className="col-span-3 col-start-2 mt-1 text-sm text-ink-soft md:col-span-4 md:col-start-7 md:mt-0">
-            {caption}
-          </span>
-        )}
-        <span className="label col-span-1 col-start-4 mt-1 text-right md:col-start-12 md:mt-0">
-          {meta}
-        </span>
-      </Link>
-    </motion.div>
+        {items.map((item, i) => (
+          <EntryRow
+            key={item.slug}
+            to={`${hrefBase}/${item.slug}`}
+            index={String(i + 1).padStart(2, '0')}
+            title={item.title ?? 'Untitled'}
+            caption={item.client || item.employer || item.resume}
+            meta={
+              item.endDate
+                ? `${item.startDate}–${item.endDate === 'Present' ? 'now' : item.endDate}`
+                : item.date
+            }
+          />
+        ))}
+      </motion.div>
+    </section>
   );
 }
 
@@ -52,118 +63,89 @@ export default function Home() {
   const personal = projects.filter((p) => p.category === 'Personal');
 
   return (
-    <Shell>
-      {/* ============ Masthead ============ */}
-      <section className="pt-14 md:pt-20">
-        <Grid>
-          <div className="col-span-4 md:col-span-12">
-            <Label>Alex Gerard — Portfolio — Belgium</Label>
-          </div>
-        </Grid>
-
-        <Grid className="mt-4 items-end">
-          <h1 className="col-span-4 text-[15vw] font-semibold leading-[0.92] tracking-[-0.04em] md:col-span-9 md:text-[8.5rem]">
-            IT Consultant
-            <br />
-            <span className="text-ink-faint">&amp; Developer</span>
-          </h1>
-          <p className="col-span-4 mt-6 self-end text-sm leading-relaxed text-ink-soft md:col-span-3 md:mt-0">
-            I build internal business applications and tools — currently at
-            Edda, working with .NET, React and Azure. This site is a working
-            index of what I do.
-          </p>
-        </Grid>
-
-        <Rule weight="heavy" className="mt-10" />
-
-        {/* facts strip */}
-        <Grid className="py-4">
-          {[
-            ['Status', 'Available'],
-            ['Based in', 'Belgium'],
-            ['Focus', '.NET · React · Azure'],
-            ['Languages', 'FR · EN'],
-          ].map(([k, v]) => (
-            <div key={k} className="col-span-2 md:col-span-3">
-              <Label className="block">{k}</Label>
-              <p className="mt-1.5 text-sm font-medium">{v}</p>
-            </div>
-          ))}
-        </Grid>
-        <Rule />
-      </section>
-
-      {/* ============ Work ============ */}
-      <section className="pt-14">
-        <SectionHead
-          index="01"
-          title="Selected Work"
-          aside={`${work.length} entries`}
-        />
-        <Rule weight="heavy" />
-        <motion.div variants={listVariants} initial="initial" animate="animate">
-          {work.map((item, i) => (
-            <IndexRow
-              key={item.slug}
-              to={`/work/${item.slug}`}
-              index={String(i + 1).padStart(2, '0')}
-              title={item.title ?? 'Untitled'}
-              caption={item.client || item.employer}
-              meta={`${item.startDate}–${item.endDate === 'Present' ? 'now' : item.endDate || ''}`}
-            />
-          ))}
+    <Shell className="pb-8 pt-16 md:pt-24">
+      {/* ============ Hero ============ */}
+      <motion.section
+        initial="initial"
+        animate="animate"
+        variants={listVariants}
+      >
+        <motion.div variants={rowVariants}>
+          <Label className="flex items-center gap-2">
+            <span className="size-1.5 animate-pulse rounded-full bg-accent" />
+            Available for new projects
+          </Label>
         </motion.div>
-      </section>
 
-      {/* ============ Writing ============ */}
-      <section className="pt-14">
-        <SectionHead
-          index="02"
-          title="Writing"
-          aside={`${writing.length} entries`}
-        />
-        <Rule weight="heavy" />
-        <motion.div variants={listVariants} initial="initial" animate="animate">
-          {writing.map((post, i) => (
-            <IndexRow
-              key={post.slug}
-              to={`/blog/${post.slug}`}
-              index={String(i + 1).padStart(2, '0')}
-              title={post.title ?? 'Untitled'}
-              caption={post.resume}
-              meta={post.date}
-            />
-          ))}
-        </motion.div>
-      </section>
+        <motion.h1
+          variants={rowVariants}
+          className="mt-6 text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl md:text-7xl"
+        >
+          Alex Gerard —<br />
+          <span className="text-accent-gradient">IT Consultant</span> &amp;{' '}
+          <span className="text-text-2">Developer</span>
+        </motion.h1>
 
-      {/* ============ Personal ============ */}
-      {personal.length > 0 && (
-        <section className="pt-14">
-          <SectionHead
-            index="03"
-            title="Personal"
-            aside={`${personal.length} entries`}
-          />
-          <Rule weight="heavy" />
-          <motion.div
-            variants={listVariants}
-            initial="initial"
-            animate="animate"
-          >
-            {personal.map((p, i) => (
-              <IndexRow
-                key={p.slug}
-                to={`/projects/${p.slug}`}
-                index={String(i + 1).padStart(2, '0')}
-                title={p.title ?? 'Untitled'}
-                caption={p.resume}
-                meta={p.date}
-              />
+        <motion.p
+          variants={rowVariants}
+          className="mt-6 max-w-xl text-base leading-relaxed text-text-2 sm:text-lg"
+        >
+          I build internal business applications and tools — currently at{' '}
+          <span className="text-text">Edda</span>, working across .NET, React
+          and Azure. This site is a living index of what I do.
+        </motion.p>
+
+        {/* stack + socials strip */}
+        <motion.div
+          variants={rowVariants}
+          className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+        >
+          <div className="flex flex-wrap gap-1.5">
+            {stack.map((s) => (
+              <span
+                key={s}
+                className="rounded-md border border-line bg-surface px-2 py-1 font-mono text-xs text-text-2"
+              >
+                {s}
+              </span>
             ))}
-          </motion.div>
-        </section>
-      )}
+          </div>
+          <span className="hidden h-4 w-px bg-line sm:block" />
+          <div className="flex items-center gap-4">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group text-sm text-text-2 transition-colors hover:text-text"
+              >
+                <span className="link-underline">{s.label}</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      </motion.section>
+
+      {/* ============ Index ============ */}
+      <IndexSection
+        index="01"
+        title="Selected Work"
+        items={work}
+        hrefBase="/work"
+      />
+      <IndexSection
+        index="02"
+        title="Writing"
+        items={writing}
+        hrefBase="/blog"
+      />
+      <IndexSection
+        index="03"
+        title="Personal Projects"
+        items={personal}
+        hrefBase="/projects"
+      />
     </Shell>
   );
 }

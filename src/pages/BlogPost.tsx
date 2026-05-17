@@ -29,8 +29,7 @@ export default function BlogPost() {
 
   return (
     <ArticleLayout
-      index="02"
-      kind="Writing"
+      eyebrow="Writing / 02"
       title={post.title ?? 'Untitled'}
       meta={meta}
       content={post.content}
