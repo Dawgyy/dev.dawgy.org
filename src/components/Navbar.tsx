@@ -9,6 +9,7 @@ const nav = [
   { to: '/', label: 'Index' },
   { to: '/projects', label: 'Work' },
   { to: '/blog', label: 'Writing' },
+  { to: '/about', label: 'About' },
 ];
 
 export function Navbar() {

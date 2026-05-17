@@ -15,6 +15,7 @@ const pages = [
   { label: 'Index', to: '/' },
   { label: 'Work', to: '/projects' },
   { label: 'Writing', to: '/blog' },
+  { label: 'About', to: '/about' },
 ];
 
 export function Footer() {

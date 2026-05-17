@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { cn } from '@/lib/utils';
 
 /**
  * Global cursor spotlight.
- * One pointer listener updates --mx/--my on every `.card` under the cursor,
- * so card borders light up where the cursor is (the signature interaction).
- * Also drives a soft page-wide accent glow that trails the pointer.
+ *
+ * - A soft page-wide accent glow trails the pointer.
+ * - The `.card` under the cursor gets --mx/--my so its border lights up
+ *   where the cursor is (the signature interaction).
+ *
+ * Only the hovered card is touched per frame — found via `closest('.card')`
+ * on the event target, so there's no full-DOM scan and no layout thrash.
  */
 export function SpotlightLayer() {
   const glowRef = useRef<HTMLDivElement>(null);
@@ -14,18 +17,26 @@ export function SpotlightLayer() {
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     let raf = 0;
+    let lastCard: HTMLElement | null = null;
+
     const onMove = (e: PointerEvent) => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        // page-wide glow
         if (glowRef.current) {
-          glowRef.current.style.transform = `translate3d(${e.clientX - 300}px, ${
-            e.clientY - 300
-          }px, 0)`;
+          glowRef.current.style.transform = `translate3d(${
+            e.clientX - 300
+          }px, ${e.clientY - 300}px, 0)`;
         }
-        // per-card border spotlight
-        const cards = document.querySelectorAll<HTMLElement>('.card');
-        for (const card of cards) {
+
+        const target = e.target as HTMLElement | null;
+        const card = target?.closest<HTMLElement>('.card') ?? null;
+
+        if (card !== lastCard) {
+          lastCard?.style.removeProperty('--spot');
+          lastCard = card;
+          card?.style.setProperty('--spot', '1');
+        }
+        if (card) {
           const r = card.getBoundingClientRect();
           card.style.setProperty('--mx', `${e.clientX - r.left}px`);
           card.style.setProperty('--my', `${e.clientY - r.top}px`);
@@ -51,20 +62,4 @@ export function SpotlightLayer() {
       }}
     />
   );
-}
-
-/**
- * A surface that lights its border where the cursor hovers.
- * Renders as a div or an anchor-less wrapper — pair with a Link inside.
- */
-export function Card({
-  children,
-  className,
-  as: Tag = 'div',
-}: {
-  children: React.ReactNode;
-  className?: string;
-  as?: 'div' | 'article' | 'li';
-}) {
-  return <Tag className={cn('card', className)}>{children}</Tag>;
 }

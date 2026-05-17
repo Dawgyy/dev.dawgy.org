@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getContentBySlug } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
 import { useViewCounter } from '@/hooks/use-view-counter';
+import { readingTime } from '@/lib/utils';
 import NotFound from './NotFound';
 
 export default function BlogPost() {
@@ -20,6 +21,7 @@ export default function BlogPost() {
 
   const meta = [
     post.date && { label: 'Published', value: post.date },
+    { label: 'Reading time', value: `${readingTime(post.content)} min` },
     views !== null && {
       label: 'Views',
       value: <span className="nums">{views}</span>,
@@ -31,6 +33,8 @@ export default function BlogPost() {
     <ArticleLayout
       eyebrow="Writing / 02"
       title={post.title ?? 'Untitled'}
+      description={post.resume}
+      path={`/blog/${slug}`}
       meta={meta}
       content={post.content}
     />

@@ -6,6 +6,7 @@ import BlogPost from './pages/BlogPost';
 import Projects from './pages/Projects';
 import ProjectPost from './pages/ProjectPost';
 import WorkPost from './pages/WorkPost';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="projects" element={<Projects />} />
