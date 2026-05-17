@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { motion } from 'framer-motion';
+import { Shell, Grid, Rule, Label } from './primitives';
 import { PageHeader } from './PageHeader';
-import { EASE_OUT } from '@/lib/utils';
 
 const MarkdownRenderer = lazy(() =>
   import('./MarkdownRenderer').then((m) => ({ default: m.MarkdownRenderer })),
@@ -10,12 +9,8 @@ const MarkdownRenderer = lazy(() =>
 function MarkdownSkeleton() {
   return (
     <div className="space-y-3" aria-hidden>
-      {[...Array(5)].map((_, i) => (
-        <div
-          key={i}
-          className="h-4 animate-pulse rounded bg-muted"
-          style={{ width: `${70 + ((i * 13) % 30)}%` }}
-        />
+      {[92, 78, 85, 60, 80].map((w, i) => (
+        <div key={i} className="h-3.5 bg-field" style={{ width: `${w}%` }} />
       ))}
     </div>
   );
@@ -27,68 +22,67 @@ interface MetaItem {
 }
 
 interface ArticleLayoutProps {
-  eyebrow?: string;
+  index: string;
+  kind: string;
   title: string;
-  subtitle?: React.ReactNode;
-  /** Inline meta shown directly under the title (date, views…). */
-  inlineMeta?: React.ReactNode;
-  /** Grid of key/value pairs shown in a panel. */
+  description?: string;
   meta?: MetaItem[];
-  /** Action buttons (links to repo / demo). */
   actions?: React.ReactNode;
   content: string;
 }
 
 export function ArticleLayout({
-  eyebrow,
+  index,
+  kind,
   title,
-  subtitle,
-  inlineMeta,
+  description,
   meta,
   actions,
   content,
 }: ArticleLayoutProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: EASE_OUT }}
-      className="mx-auto w-full max-w-3xl px-4 pb-12 pt-28 md:px-6 md:pt-32"
-    >
-      <div className="space-y-6">
-        <PageHeader eyebrow={eyebrow} title={title} back />
+    <Shell>
+      <PageHeader
+        index={`${index} — ${kind}`}
+        title={title}
+        description={description}
+        back
+      />
 
-        {subtitle && (
-          <p className="text-lg font-medium text-primary">{subtitle}</p>
-        )}
+      {/* Meta table — key/value rows under hairlines */}
+      {meta && meta.length > 0 && (
+        <Grid className="py-3">
+          {meta.map((m) => (
+            <div
+              key={m.label}
+              className="col-span-2 border-t border-rule pt-3 md:col-span-3"
+            >
+              <Label className="block">{m.label}</Label>
+              <p className="mt-1.5 text-sm font-medium leading-snug">
+                {m.value}
+              </p>
+            </div>
+          ))}
+        </Grid>
+      )}
 
-        {inlineMeta && (
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            {inlineMeta}
-          </div>
-        )}
+      {actions && (
+        <>
+          <Rule />
+          <div className="flex flex-wrap gap-3 py-4">{actions}</div>
+        </>
+      )}
 
-        {meta && meta.length > 0 && (
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
-            {meta.map((m) => (
-              <div key={m.label} className="bg-card/80 p-4 backdrop-blur">
-                <dt className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  {m.label}
-                </dt>
-                <dd className="mt-1 text-sm font-medium">{m.value}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
+      <Rule weight="heavy" />
 
-        {actions && <div className="flex flex-wrap gap-3">{actions}</div>}
-      </div>
-
-      <div className="my-8 h-px bg-border" />
-
-      <Suspense fallback={<MarkdownSkeleton />}>
-        <MarkdownRenderer content={content} />
-      </Suspense>
-    </motion.article>
+      {/* Body — offset into the grid like a print column */}
+      <Grid className="py-12">
+        <article className="col-span-4 md:col-span-8 md:col-start-3">
+          <Suspense fallback={<MarkdownSkeleton />}>
+            <MarkdownRenderer content={content} />
+          </Suspense>
+        </article>
+      </Grid>
+    </Shell>
   );
 }

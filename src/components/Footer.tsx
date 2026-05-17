@@ -1,103 +1,84 @@
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
+import { Shell, Grid, Rule, Label } from './primitives';
 
-const socials = [
-  { href: 'https://github.com/Dawgyy', label: 'GitHub', icon: Github },
+const links = [
+  { label: 'GitHub', href: 'https://github.com/Dawgyy' },
   {
-    href: 'https://www.linkedin.com/in/alex-gerard-46b201295/',
     label: 'LinkedIn',
-    icon: Linkedin,
+    href: 'https://www.linkedin.com/in/alex-gerard-46b201295/',
   },
-  { href: 'https://x.com/dxwgyy', label: 'X', icon: Twitter },
-  { href: 'mailto:gerardalexpro@gmail.com', label: 'Email', icon: Mail },
+  { label: 'X / Twitter', href: 'https://x.com/dxwgyy' },
+  { label: 'Email', href: 'mailto:gerardalexpro@gmail.com' },
 ];
 
-const sitemap = [
-  { to: '/', label: 'Home' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/blog', label: 'Blog' },
+const pages = [
+  { label: 'Index', to: '/' },
+  { label: 'Work', to: '/projects' },
+  { label: 'Writing', to: '/blog' },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 border-t border-border/60">
-      <div className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6">
-        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
-          <div className="max-w-sm space-y-3">
-            <Link to="/" className="flex items-center gap-2.5">
-              <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 font-bold text-white">
-                A
-              </span>
-              <span className="text-lg font-semibold">Alex Gerard</span>
-            </Link>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              IT Consultant &amp; Developer based in Belgium. Building digital
-              experiences with precision and passion.
+    <footer className="mt-32">
+      <Shell>
+        <Rule weight="heavy" />
+        <Grid className="py-12">
+          <div className="col-span-4 md:col-span-5">
+            <p className="text-2xl font-semibold tracking-tight">Alex Gerard</p>
+            <p className="mt-1 text-sm text-ink-soft">
+              IT Consultant &amp; Developer — Belgium
+            </p>
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-ink-soft">
+              Open to conversations about software, consulting, and well-built
+              tools.
             </p>
           </div>
 
-          <div className="flex gap-16">
-            <nav className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Navigate
-              </h3>
-              <ul className="space-y-2 text-sm">
-                {sitemap.map((l) => (
-                  <li key={l.to}>
-                    <Link
-                      to={l.to}
-                      className="text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <nav className="col-span-2 mt-8 md:col-span-3 md:mt-0">
+            <Label className="block pb-3">Pages</Label>
+            <ul className="space-y-1.5">
+              {pages.map((p) => (
+                <li key={p.to}>
+                  <Link
+                    to={p.to}
+                    className="group inline-flex text-sm text-ink-soft transition-colors hover:text-ink"
+                  >
+                    <span className="link-underline">{p.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Connect
-              </h3>
-              <ul className="space-y-2 text-sm">
-                {socials.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {s.label}
-                      <ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <nav className="col-span-2 mt-8 md:col-span-4 md:mt-0">
+            <Label className="block pb-3">Elsewhere</Label>
+            <ul className="space-y-1.5">
+              {links.map((l) => (
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex text-sm text-ink-soft transition-colors hover:text-ink"
+                  >
+                    <span className="link-underline">{l.label}</span>
+                    <span className="ml-1 text-ink-faint">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Grid>
+        <Rule />
+        <div className="flex flex-col gap-1 py-5 text-[11px] text-ink-faint sm:flex-row sm:justify-between">
+          <span className="label">
+            © {new Date().getFullYear()} Alex Gerard
+          </span>
+          <span className="label">
+            Built with React — Press G to toggle grid
+          </span>
         </div>
-
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 sm:flex-row">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Alex Gerard. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1.5">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              >
-                <s.icon className="size-[18px]" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
+      </Shell>
     </footer>
   );
 }

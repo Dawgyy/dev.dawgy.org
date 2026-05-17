@@ -3,7 +3,6 @@ import { getContentBySlug } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
 import { useViewCounter } from '@/hooks/use-view-counter';
 import NotFound from './NotFound';
-import { CalendarDays, Eye } from 'lucide-react';
 
 export default function BlogPost() {
   const { slug = '' } = useParams<{ slug: string }>();
@@ -14,32 +13,27 @@ export default function BlogPost() {
     return (
       <NotFound
         title="Article not found"
-        description="This blog post doesn't exist or has been removed."
+        description="This entry does not exist or has been removed."
       />
     );
   }
 
+  const meta = [
+    post.date && { label: 'Published', value: post.date },
+    views !== null && {
+      label: 'Views',
+      value: <span className="nums">{views}</span>,
+    },
+    { label: 'Section', value: 'Writing' },
+  ].filter(Boolean) as { label: string; value: React.ReactNode }[];
+
   return (
     <ArticleLayout
-      eyebrow="Article"
+      index="02"
+      kind="Writing"
       title={post.title ?? 'Untitled'}
+      meta={meta}
       content={post.content}
-      inlineMeta={
-        <>
-          {post.date && (
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays className="size-4" />
-              <time dateTime={post.date}>{post.date}</time>
-            </span>
-          )}
-          {views !== null && (
-            <span className="inline-flex items-center gap-1.5">
-              <Eye className="size-4" />
-              {views} {views === 1 ? 'view' : 'views'}
-            </span>
-          )}
-        </>
-      }
     />
   );
 }

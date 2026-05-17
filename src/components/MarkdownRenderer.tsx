@@ -3,16 +3,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
-import { Check, Copy } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import 'highlight.js/styles/github-dark.css';
+import './markdown-code.css';
 
-interface MarkdownRendererProps {
-  content: string;
-  className?: string;
-}
-
-/** Code block with a copy-to-clipboard affordance. */
 function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   const [copied, setCopied] = useState(false);
 
@@ -23,28 +16,23 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
     if (!code) return;
     navigator.clipboard.writeText(code).then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
+      setTimeout(() => setCopied(false), 1500);
     });
   };
 
   return (
-    <div className="code-block group relative my-6">
-      <button
-        type="button"
-        onClick={copy}
-        aria-label="Copy code"
-        className="absolute right-3 top-3 z-10 grid size-8 place-items-center rounded-lg bg-white/10 text-white/70 opacity-0 backdrop-blur transition-all hover:bg-white/20 hover:text-white group-hover:opacity-100"
-      >
-        {copied ? (
-          <Check className="size-4 text-emerald-400" />
-        ) : (
-          <Copy className="size-4" />
-        )}
-      </button>
-      <pre
-        className="overflow-x-auto rounded-2xl border border-white/10 bg-[#0d1117] p-4 text-sm leading-relaxed"
-        {...props}
-      >
+    <div className="code-block group relative my-6 border border-rule">
+      <div className="flex items-center justify-between border-b border-rule bg-field px-3 py-1.5">
+        <span className="label">Source</span>
+        <button
+          type="button"
+          onClick={copy}
+          className="label transition-colors hover:text-ink"
+        >
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed" {...props}>
         {children}
       </pre>
     </div>
@@ -54,19 +42,27 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
 export function MarkdownRenderer({
   content,
   className,
-}: MarkdownRendererProps) {
+}: {
+  content: string;
+  className?: string;
+}) {
   return (
     <div
       className={cn(
-        'prose prose-neutral max-w-none dark:prose-invert',
-        'prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight',
-        'prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl',
-        'prose-a:font-medium prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
-        'prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.85em] prose-code:font-medium prose-code:before:content-[""] prose-code:after:content-[""]',
-        'prose-pre:bg-transparent prose-pre:p-0',
-        'prose-blockquote:border-l-primary prose-blockquote:not-italic prose-blockquote:text-muted-foreground',
-        'prose-img:rounded-2xl prose-img:border prose-img:border-border',
-        'prose-hr:border-border',
+        'prose max-w-none',
+        // typography tuned to the swiss system
+        'prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink',
+        'prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-rule',
+        'prose-h3:text-base prose-h3:uppercase prose-h3:tracking-wide prose-h3:text-ink-soft',
+        'prose-p:text-ink-soft prose-p:leading-relaxed prose-li:text-ink-soft',
+        'prose-strong:text-ink prose-strong:font-semibold',
+        'prose-a:text-ink prose-a:font-medium prose-a:underline prose-a:decoration-accent prose-a:underline-offset-[3px] hover:prose-a:text-accent',
+        'prose-code:font-mono prose-code:text-[0.85em] prose-code:text-ink prose-code:bg-field prose-code:px-1 prose-code:py-0.5 prose-code:before:content-[""] prose-code:after:content-[""]',
+        'prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0',
+        'prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:not-italic prose-blockquote:text-ink-soft prose-blockquote:font-normal',
+        'prose-img:border prose-img:border-rule',
+        'prose-hr:border-rule',
+        'prose-li:marker:text-ink-faint',
         className,
       )}
     >

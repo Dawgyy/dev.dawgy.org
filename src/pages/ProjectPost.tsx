@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { getContentBySlug } from '@/lib/content';
 import { ArticleLayout } from '@/components/ArticleLayout';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import NotFound from './NotFound';
-import { Github, Globe } from 'lucide-react';
 
 export default function ProjectPost() {
   const { slug = '' } = useParams<{ slug: string }>();
@@ -14,7 +11,7 @@ export default function ProjectPost() {
     return (
       <NotFound
         title="Project not found"
-        description="This project doesn't exist or has been removed."
+        description="This project does not exist or has been removed."
       />
     );
   }
@@ -24,53 +21,48 @@ export default function ProjectPost() {
     project.employer && { label: 'Employer', value: project.employer },
     project.role && { label: 'Role', value: project.role },
     project.sector && { label: 'Sector', value: project.sector },
-    project.startDate && {
+    project.date && { label: 'Date', value: project.date },
+    (project.startDate || project.endDate) && {
       label: 'Timeline',
-      value: `${project.startDate}${
-        project.endDate ? ` — ${project.endDate}` : ''
+      value: `${project.startDate ?? ''}${
+        project.endDate ? ` – ${project.endDate}` : ''
       }`,
     },
   ].filter(Boolean) as { label: string; value: React.ReactNode }[];
 
   return (
     <ArticleLayout
-      eyebrow={project.category ?? 'Project'}
+      index="01"
+      kind={project.category === 'Personal' ? 'Personal' : 'Project'}
       title={project.title ?? 'Untitled'}
-      content={project.content}
-      subtitle={
-        project.tags?.length ? (
-          <span className="flex flex-wrap gap-1.5">
-            {project.tags.map((tag: string) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
-              </Badge>
-            ))}
-          </span>
-        ) : undefined
-      }
+      description={project.resume}
       meta={meta}
       actions={
         <>
           {project.github && (
-            <Button variant="outline" size="sm" asChild>
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="size-4" /> View code
-              </a>
-            </Button>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 border border-rule-strong px-3 py-1.5 text-sm font-medium"
+            >
+              <span className="link-underline">Repository</span>
+              <span className="text-ink-faint">↗</span>
+            </a>
           )}
           {project.demo && (
-            <Button size="sm" asChild>
-              <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                <Globe className="size-4" /> Live demo
-              </a>
-            </Button>
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 bg-ink px-3 py-1.5 text-sm font-medium text-paper"
+            >
+              Live demo <span aria-hidden>↗</span>
+            </a>
           )}
         </>
       }
+      content={project.content}
     />
   );
 }
