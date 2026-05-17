@@ -1,173 +1,144 @@
-import { getAllContent } from '@/lib/content';
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
+import { Link } from 'react-router-dom';
+import { getAllContent, type ContentData } from '@/lib/content';
+import { PageHeader } from '@/components/PageHeader';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Code, Briefcase, Globe } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { containerVariants, itemVariants } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { Briefcase, Code2, ArrowUpRight } from 'lucide-react';
+
+function ProjectCard({ project }: { project: ContentData }) {
+  const isPro = project.category === 'Professional';
+  return (
+    <motion.div variants={itemVariants}>
+      <Link
+        to={`/projects/${project.slug}`}
+        className="group flex h-full flex-col gap-4 rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl hover:shadow-primary/5"
+      >
+        <div className="flex items-start justify-between">
+          <div
+            className={`grid size-12 place-items-center rounded-2xl ${
+              isPro
+                ? 'bg-primary/10 text-primary'
+                : 'bg-emerald-500/10 text-emerald-500'
+            }`}
+          >
+            {isPro ? (
+              <Briefcase className="size-6" />
+            ) : (
+              <Code2 className="size-6" />
+            )}
+          </div>
+          <ArrowUpRight className="size-5 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
+        </div>
+
+        <div className="flex-1 space-y-1.5">
+          <h3 className="text-lg font-semibold leading-snug transition-colors group-hover:text-primary">
+            {project.title}
+          </h3>
+          {project.resume && (
+            <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+              {project.resume}
+            </p>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-1.5">
+          <Badge variant={isPro ? 'soft' : 'success'}>{project.category}</Badge>
+          {project.tags?.slice(0, 2).map((tag: string) => (
+            <Badge key={tag} variant="secondary">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+function ProjectSection({
+  title,
+  icon,
+  projects,
+}: {
+  title: string;
+  icon: React.ReactNode;
+  projects: ContentData[];
+}) {
+  if (projects.length === 0) return null;
+  return (
+    <section className="space-y-6">
+      <div className="flex items-center gap-2.5">
+        <span className="grid size-8 place-items-center rounded-lg bg-accent text-primary">
+          {icon}
+        </span>
+        <h2 className="text-xl font-bold">{title}</h2>
+        <span className="text-sm text-muted-foreground">
+          ({projects.length})
+        </span>
+      </div>
+      <motion.div
+        variants={containerVariants}
+        initial="initial"
+        animate="animate"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {projects.map((p) => (
+          <ProjectCard key={p.slug} project={p} />
+        ))}
+      </motion.div>
+    </section>
+  );
+}
 
 export default function Projects({
   category,
 }: {
   category?: 'Professional' | 'Personal';
 }) {
-  const navigate = useNavigate();
-  const allProjects = getAllContent('projects') as any[];
+  const all = getAllContent('projects');
+  const pro = all.filter((p) => p.category === 'Professional');
+  const personal = all.filter((p) => p.category === 'Personal');
 
-  let proProjects = allProjects.filter((p) => p.category === 'Professional');
-  let personalProjects = allProjects.filter((p) => p.category === 'Personal');
-
-  let title = 'Projects';
-  let description = 'A collection of my professional and personal work.';
-
-  if (category === 'Professional') {
-    personalProjects = [];
-    title = 'Professional Projects';
-    description =
-      'My work at Edda International and other professional engagements.';
-  } else if (category === 'Personal') {
-    proProjects = [];
-    title = 'Personal Projects';
-    description = 'Side projects, experiments, and open source contributions.';
-  }
-
-  const getGradientClass = () => {
-    if (category === 'Professional')
-      return 'bg-white/[0.02] backdrop-blur-[40px] border border-white/5 shadow-sm';
-    if (category === 'Personal')
-      return 'bg-white/[0.02] backdrop-blur-[40px] border border-white/5 shadow-sm';
-    return '';
-  };
-
-  const getProjectStyle = () => {
-    return '';
-  };
-
-  const ProjectHeader = ({ project }: { project: any }) => (
-    <div className="flex flex-1 w-full h-full min-h-[6rem] items-center justify-center mb-4 group-hover:scale-[1.02] transition-transform duration-500">
-      <div className="absolute top-0 right-0 z-10">
-        <Badge
-          variant={
-            project.category === 'Professional' ? 'default' : 'secondary'
-          }
-          className="text-[10px] px-2.5 py-1 backdrop-blur-md bg-white/5 border border-white/5 text-slate-600 shadow-none font-medium"
-        >
-          {project.category}
-        </Badge>
-      </div>
-      {project.category === 'Professional' ? (
-        <Briefcase className="h-10 w-10 text-slate-300 group-hover:text-blue-500 transition-colors duration-500" />
-      ) : (
-        <Code className="h-10 w-10 text-slate-300 group-hover:text-emerald-500 transition-colors duration-500" />
-      )}
-    </div>
-  );
+  const header = category
+    ? category === 'Professional'
+      ? {
+          title: 'Professional Work',
+          description:
+            'My work at Edda International and other professional engagements.',
+        }
+      : {
+          title: 'Personal Projects',
+          description:
+            'Side projects, experiments, and open source contributions.',
+        }
+    : {
+        title: 'Projects',
+        description: 'A collection of my professional and personal work.',
+      };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-4 md:px-6 relative w-full">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div className="space-y-6">
-          <div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate(-1)}
-              className="-ml-4 text-muted-foreground hover:text-foreground scale-90 origin-left rounded-full"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-          </div>
-          {category ? (
-            <div
-              className={`rounded-[2.5rem] p-8 ${getGradientClass()} border border-white/5 relative overflow-hidden`}
-            >
-              <div className="relative z-10 flex flex-col justify-end h-full min-h-[10rem]">
-                <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
-                  {title}
-                </h1>
-                <p className="text-muted-foreground text-lg mt-2 font-medium max-w-xl">
-                  {description}
-                </p>
-              </div>
-              <div className="absolute -right-10 -bottom-10 opacity-10 transform rotate-12 pointer-events-none mix-blend-overlay">
-                <div>
-                  {category === 'Professional' ? (
-                    <Briefcase className="h-80 w-80 text-primary" />
-                  ) : (
-                    <Code className="h-80 w-80 text-emerald-500" />
-                  )}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-2 px-2">
-              <h1 className="text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
-                {title}
-              </h1>
-              <p className="text-muted-foreground text-lg">{description}</p>
-            </div>
-          )}
-        </div>
+    <div className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-12 pt-28 md:px-6 md:pt-32">
+      <PageHeader
+        eyebrow="Portfolio"
+        title={header.title}
+        description={header.description}
+        back={Boolean(category)}
+      />
 
-        {proProjects.length > 0 && (
-          <div className="space-y-6">
-            {!category && (
-              <>
-                <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
-                  <span className="bg-primary/10 text-primary p-1 rounded-md">
-                    <Briefcase className="h-5 w-5" />
-                  </span>{' '}
-                  Professional Projects
-                </h2>
-                <Separator className="bg-slate-200/50 dark:bg-slate-700/50" />
-              </>
-            )}
-            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[20rem] gap-6">
-              {proProjects.map((project) => (
-                <BentoGridItem
-                  key={project.slug}
-                  title={project.title}
-                  description={project.resume}
-                  header={<ProjectHeader project={project} />}
-                  icon={<Globe className="h-4 w-4 text-neutral-500" />}
-                  className={`col-span-1 ${getProjectStyle()}`}
-                  href={`/projects/${project.slug}`}
-                />
-              ))}
-            </BentoGrid>
-          </div>
-        )}
-
-        {personalProjects.length > 0 && (
-          <div className="space-y-6">
-            {!category && (
-              <>
-                <h2 className="text-2xl font-bold flex items-center gap-2 px-2">
-                  <span className="bg-primary/10 text-emerald-500 p-1 rounded-md">
-                    <Code className="h-5 w-5" />
-                  </span>{' '}
-                  Personal Projects
-                </h2>
-                <Separator className="bg-slate-200/50 dark:bg-slate-700/50" />
-              </>
-            )}
-            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[20rem] gap-6">
-              {personalProjects.map((project) => (
-                <BentoGridItem
-                  key={project.slug}
-                  title={project.title}
-                  description={project.resume}
-                  header={<ProjectHeader project={project} />}
-                  icon={<Globe className="h-4 w-4 text-neutral-500" />}
-                  className={`col-span-1 ${getProjectStyle()}`}
-                  href={`/projects/${project.slug}`}
-                />
-              ))}
-            </BentoGrid>
-          </div>
-        )}
-      </div>
+      {(!category || category === 'Professional') && (
+        <ProjectSection
+          title="Professional"
+          icon={<Briefcase className="size-4" />}
+          projects={pro}
+        />
+      )}
+      {(!category || category === 'Personal') && (
+        <ProjectSection
+          title="Personal"
+          icon={<Code2 className="size-4" />}
+          projects={personal}
+        />
+      )}
     </div>
   );
 }
