@@ -76,7 +76,7 @@ export default function Home() {
         <motion.div variants={rowVariants}>
           <Label className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-accent" />
-            Consultant @ Edda — Belgium
+            Belgium-based · Consultant at Edda International
           </Label>
         </motion.div>
 

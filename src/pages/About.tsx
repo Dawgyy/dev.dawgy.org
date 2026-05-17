@@ -34,7 +34,7 @@ const skillGroups = [
 const facts = [
   ['Based in', 'Belgium'],
   ['Role', 'IT Consultant & Developer'],
-  ['Company', 'Edda'],
+  ['Company', 'Edda International'],
   ['Languages', 'French · English'],
 ];
 
@@ -78,7 +78,7 @@ export default function About() {
               <Label>Belgium</Label>
               <Label className="flex items-center gap-1.5">
                 <span className="size-1.5 rounded-full bg-accent" />
-                Consultant @ Edda
+                Edda International
               </Label>
             </div>
           </div>
