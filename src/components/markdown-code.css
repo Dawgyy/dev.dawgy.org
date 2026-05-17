@@ -1,0 +1,51 @@
+/* Syntax highlighting — themed to the swiss palette, light + dark. */
+.hljs {
+  color: var(--color-ink);
+  background: transparent;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--color-ink-faint);
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-section,
+.hljs-link {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-template-tag,
+.hljs-addition {
+  color: var(--color-ink-soft);
+}
+
+.hljs-title,
+.hljs-name,
+.hljs-type,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-built_in,
+.hljs-number {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.hljs-deletion {
+  color: var(--color-ink-faint);
+  text-decoration: line-through;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}

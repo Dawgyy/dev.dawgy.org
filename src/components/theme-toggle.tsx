@@ -1,38 +1,38 @@
-import { Moon, Sun } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from './theme-provider';
 import { cn } from '@/lib/utils';
 
+/**
+ * Swiss toggle: a labelled two-state switch (LT / DK), no icons.
+ * The active state is filled with ink.
+ */
 export function ThemeToggle({ className }: { className?: string }) {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === 'dark';
+  const { theme, setTheme } = useTheme();
 
   return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+    <div
       className={cn(
-        'relative grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/60',
+        'flex select-none border border-rule text-[10px] font-medium',
         className,
       )}
+      role="group"
+      aria-label="Color theme"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={theme}
-          initial={{ opacity: 0, rotate: -45, scale: 0.6 }}
-          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
-          transition={{ duration: 0.2 }}
-          className="absolute"
-        >
-          {isDark ? (
-            <Moon className="size-[18px]" />
-          ) : (
-            <Sun className="size-[18px]" />
+      {(['light', 'dark'] as const).map((mode) => (
+        <button
+          key={mode}
+          type="button"
+          onClick={() => setTheme(mode)}
+          aria-pressed={theme === mode}
+          className={cn(
+            'px-2 py-1 uppercase tracking-wider transition-colors',
+            theme === mode
+              ? 'bg-ink text-paper'
+              : 'text-ink-faint hover:text-ink',
           )}
-        </motion.span>
-      </AnimatePresence>
-    </button>
+        >
+          {mode === 'light' ? 'Lt' : 'Dk'}
+        </button>
+      ))}
+    </div>
   );
 }

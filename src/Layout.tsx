@@ -1,8 +1,8 @@
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
 import { useLocation, useOutlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { AmbientBackground } from './components/ui/ambient-background';
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { GridOverlay } from './components/grid-overlay';
 import { pageVariants } from './lib/utils';
 
 export function Layout() {
@@ -10,8 +10,8 @@ export function Layout() {
   const outlet = useOutlet();
 
   return (
-    <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">
-      <AmbientBackground />
+    <div className="flex min-h-[100dvh] flex-col">
+      <GridOverlay />
       <Navbar />
       <main className="grid flex-1 grid-cols-1 grid-rows-1">
         <AnimatePresence

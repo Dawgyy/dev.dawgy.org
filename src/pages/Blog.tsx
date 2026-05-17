@@ -1,54 +1,57 @@
 import { Link } from 'react-router-dom';
-import { getAllContent } from '@/lib/content';
-import { PageHeader } from '@/components/PageHeader';
-import { containerVariants, itemVariants } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CalendarDays } from 'lucide-react';
+import { getAllContent } from '@/lib/content';
+import { Shell } from '@/components/primitives';
+import { PageHeader } from '@/components/PageHeader';
+import { listVariants, rowVariants } from '@/lib/utils';
 
 export default function Blog() {
   const posts = getAllContent('blog');
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-10 px-4 pb-12 pt-28 md:px-6 md:pt-32">
+    <Shell>
       <PageHeader
-        eyebrow="Writing"
-        title="Blog"
-        description="Thoughts on development, tooling, and the craft of building software."
+        index="02"
+        title="Writing"
+        description="Notes on development, tooling, and the craft of building software."
       />
 
       <motion.div
-        variants={containerVariants}
+        variants={listVariants}
         initial="initial"
         animate="animate"
-        className="space-y-3"
+        className="pt-2"
       >
-        {posts.map((post) => (
-          <motion.div key={post.slug} variants={itemVariants}>
+        {posts.map((post, i) => (
+          <motion.div key={post.slug} variants={rowVariants}>
             <Link
               to={`/blog/${post.slug}`}
-              className="group flex flex-col gap-2 rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/5"
+              className="group grid grid-cols-4 gap-x-5 border-b border-rule py-7 md:grid-cols-12 md:gap-x-6"
             >
-              <div className="flex items-center justify-between gap-3">
-                {post.date && (
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-                    <CalendarDays className="size-3.5" />
-                    {post.date}
-                  </span>
+              <span className="nums col-span-1 text-xs text-ink-faint group-hover:text-accent">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div className="col-span-3 md:col-span-8">
+                <h2 className="link-underline inline text-2xl font-medium tracking-tight md:text-3xl">
+                  {post.title}
+                </h2>
+                {post.resume && (
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
+                    {post.resume}
+                  </p>
                 )}
-                <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
-              <h2 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-primary">
-                {post.title}
-              </h2>
-              {post.resume && (
-                <p className="line-clamp-2 leading-relaxed text-muted-foreground">
-                  {post.resume}
-                </p>
-              )}
+              <span className="label col-span-4 col-start-2 mt-3 md:col-span-3 md:col-start-10 md:mt-1 md:text-right">
+                {post.date}
+              </span>
             </Link>
           </motion.div>
         ))}
+
+        {posts.length === 0 && (
+          <p className="py-20 text-ink-soft">Nothing published yet.</p>
+        )}
       </motion.div>
-    </div>
+    </Shell>
   );
 }
