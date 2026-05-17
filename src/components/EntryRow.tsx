@@ -26,17 +26,20 @@ export function EntryRow({
     <motion.div variants={rowVariants}>
       <Link
         to={to}
-        className="card group flex items-center gap-4 px-4 py-4 hover:bg-surface-2 sm:gap-6 sm:px-6"
+        aria-label={title}
+        className="card group flex items-start gap-4 px-4 py-4 transition-colors hover:bg-surface-2 sm:gap-6 sm:px-6"
       >
-        <span className="nums label shrink-0 transition-colors group-hover:text-accent">
+        <span className="nums label mt-1 shrink-0 transition-colors group-hover:text-accent">
           {index}
         </span>
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-lg font-semibold tracking-tight sm:text-xl">
+          <h3 className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">
             <span className="link-underline">{title}</span>
           </h3>
           {caption && (
-            <p className="mt-0.5 truncate text-sm text-text-2">{caption}</p>
+            <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-text-2">
+              {caption}
+            </p>
           )}
           {tags && tags.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -51,9 +54,11 @@ export function EntryRow({
             </div>
           )}
         </div>
-        {meta && <span className="label hidden shrink-0 sm:block">{meta}</span>}
-        <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line text-text-3 transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink">
-          <ArrowUpRight className="size-4" />
+        {meta && (
+          <span className="label mt-1 hidden shrink-0 sm:block">{meta}</span>
+        )}
+        <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border border-line text-text-3 transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink group-hover:rotate-45">
+          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-rotate-45" />
         </span>
       </Link>
     </motion.div>

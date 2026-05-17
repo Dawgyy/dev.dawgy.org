@@ -35,6 +35,7 @@ export default function ProjectPost() {
       eyebrow={project.category === 'Personal' ? 'Personal / 03' : 'Work / 01'}
       title={project.title ?? 'Untitled'}
       description={project.resume}
+      path={`/projects/${slug}`}
       meta={meta}
       actions={
         <>
