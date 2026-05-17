@@ -72,7 +72,10 @@ export default function About() {
             <img
               src="/moi.jpeg"
               alt="Alex Gerard"
+              width={800}
+              height={1000}
               loading="lazy"
+              decoding="async"
               className="aspect-[4/5] w-full object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-bg/90 to-transparent p-3">

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alex Gerard — Writing</title>
+    <link>https://dev.dawgy.org/blog</link>
+    <description>Notes on development, tooling, and the craft of building software.</description>
+    <language>en</language>
+    <atom:link href="https://dev.dawgy.org/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 May 2026 23:00:24 GMT</lastBuildDate>
+    <item>
+      <title>A Bash Script for My Battery Status</title>
+      <link>https://dev.dawgy.org/blog/battery-script</link>
+      <guid isPermaLink="true">https://dev.dawgy.org/blog/battery-script</guid>
+      <pubDate>Sat, 05 Oct 2024 00:00:00 GMT</pubDate>
+      <description>Discover how to configure a simple bash script to monitor battery level on Arch Linux, with custom notifications and detailed logs. Why use complex tools when you can configure everything yourself, lightly and efficiently? Staying true to the Arch spirit: total control and simplicity.</description>
+    </item>
+    <item>
+      <title>Twitch Stream End Credits: Madyann Project</title>
+      <link>https://dev.dawgy.org/blog/obs-end-credit</link>
+      <guid isPermaLink="true">https://dev.dawgy.org/blog/obs-end-credit</guid>
+      <pubDate>Sat, 28 Sep 2024 00:00:00 GMT</pubDate>
+      <description>In the streaming world, recognizing community contributions is essential. We designed a custom end scene for Madyann</description>
+    </item>
+    <item>
+      <title>Automated PDF Generation and Deployment on a VPS</title>
+      <link>https://dev.dawgy.org/blog/deploypdf</link>
+      <guid isPermaLink="true">https://dev.dawgy.org/blog/deploypdf</guid>
+      <pubDate>Fri, 27 Sep 2024 00:00:00 GMT</pubDate>
+      <description>Automating PDF generation from Org Mode and LaTeX files, followed by their deployment on a VPS server, can be achieved in a few key steps. This includes compiling source files, merging PDFs, and uploading to the remote server via specific commands.</description>
+    </item>
+    <item>
+      <title>Why and How I Use Emacs for Writing Course Notes</title>
+      <link>https://dev.dawgy.org/blog/emacs</link>
+      <guid isPermaLink="true">https://dev.dawgy.org/blog/emacs</guid>
+      <pubDate>Fri, 01 Mar 2024 00:00:00 GMT</pubDate>
+      <description>Emacs is an extensible and customizable tool that I use to efficiently organize my course notes. With the built-in Org-mode module, I can structure my ideas, manage complex documents, and produce PDF files without difficulty.</description>
+    </item>
+  </channel>
+</rss>

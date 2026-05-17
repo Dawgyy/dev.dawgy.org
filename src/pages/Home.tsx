@@ -160,6 +160,22 @@ export default function Home() {
             </div>
           ))}
         </motion.dl>
+
+        {/* Now — what I'm currently focused on */}
+        <motion.div variants={rowVariants} className="card mt-4 p-5">
+          <div className="flex items-center gap-2">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex size-2 rounded-full bg-accent" />
+            </span>
+            <span className="label">Now</span>
+          </div>
+          <p className="mt-2.5 text-sm leading-relaxed text-text-2">
+            {/* TODO: keep this up to date — what you're working on right now. */}
+            Building internal business applications at Edda International, and
+            tinkering with side projects in my own time.
+          </p>
+        </motion.div>
       </motion.section>
 
       {/* ============ Index ============ */}

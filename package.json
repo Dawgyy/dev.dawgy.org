@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "assets": "node scripts/generate-sitemap.mjs && node scripts/generate-og.mjs && node scripts/generate-icons.mjs",
+    "assets": "node scripts/generate-sitemap.mjs && node scripts/generate-feed.mjs && node scripts/generate-og.mjs && node scripts/generate-icons.mjs",
     "build": "npm run assets && tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
@@ -20,6 +20,8 @@
     ]
   },
   "dependencies": {
+    "@fontsource/inter-tight": "^5.2.7",
+    "@fontsource/jetbrains-mono": "^5.2.8",
     "@supabase/supabase-js": "^2.91.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.29.0",

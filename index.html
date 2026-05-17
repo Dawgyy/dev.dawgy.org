@@ -6,14 +6,14 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Alex Gerard — Writing"
+      href="/feed.xml"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1b1d20" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
     <title>Alex Gerard — IT Consultant & Developer</title>
     <meta
       name="description"
@@ -41,8 +41,12 @@
         "@type": "Person",
         "name": "Alex Gerard",
         "url": "https://dev.dawgy.org",
-        "image": "https://dev.dawgy.org/moi.jpeg",
+        "image": "https://dev.dawgy.org/og/default.png",
         "jobTitle": "IT Consultant & Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Edda International"
+        },
         "address": {
           "@type": "PostalAddress",
           "addressCountry": "BE"

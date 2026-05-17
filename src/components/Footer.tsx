@@ -9,6 +9,7 @@ const links = [
   },
   { label: 'X / Twitter', href: 'https://x.com/dxwgyy' },
   { label: 'Email', href: 'mailto:gerardalexpro@gmail.com' },
+  { label: 'RSS', href: '/feed.xml' },
 ];
 
 const pages = [
