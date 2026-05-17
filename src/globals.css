@@ -226,3 +226,52 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------- */
+/*  Print — used by the /cv page to export a clean PDF              */
+/* ---------------------------------------------------------------- */
+@media print {
+  /* hide chrome */
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  :root,
+  .light {
+    --bg: #fff;
+    --bg-2: #fff;
+    --surface: #fff;
+    --surface-2: #fff;
+    --line: #d4d4d4;
+    --line-strong: #999;
+    --text: #111;
+    --text-2: #333;
+    --text-3: #555;
+    --accent: #0a6f85;
+    --accent-glow: transparent;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .print-page {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .card::before {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  @page {
+    margin: 1.4cm;
+  }
+}

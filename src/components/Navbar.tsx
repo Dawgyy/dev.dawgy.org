@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 const nav = [
   { to: '/', label: 'Index' },
-  { to: '/projects', label: 'Work' },
+  { to: '/work', label: 'Work' },
   { to: '/blog', label: 'Writing' },
   { to: '/about', label: 'About' },
 ];
@@ -56,6 +56,7 @@ export function Navbar() {
               <Link
                 key={item.to}
                 to={item.to}
+                aria-current={isActive(item.to) ? 'page' : undefined}
                 className={cn(
                   'relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors',
                   isActive(item.to)
@@ -74,17 +75,15 @@ export function Navbar() {
               </Link>
             ))}
             <span className="mx-2 h-4 w-px bg-line" />
-            <a
-              href="https://dev.dawgy.org/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-full px-3.5 py-1.5 text-sm font-medium text-text-3 transition-colors hover:text-text"
+            <Link
+              to="/cv"
+              className={cn(
+                'group rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors',
+                isActive('/cv') ? 'text-text' : 'text-text-3 hover:text-text',
+              )}
             >
               <span className="link-underline">CV</span>
-              <span className="ml-1 text-text-3 transition-colors group-hover:text-accent">
-                ↗
-              </span>
-            </a>
+            </Link>
             <ThemeToggle className="ml-1" />
           </nav>
 
@@ -139,14 +138,15 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <a
-                href="https://dev.dawgy.org/cv.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-3.5 text-base font-medium text-text-2"
+              <Link
+                to="/cv"
+                className={cn(
+                  'py-3.5 text-base font-medium',
+                  isActive('/cv') ? 'text-accent' : 'text-text-2',
+                )}
               >
-                CV ↗
-              </a>
+                CV
+              </Link>
             </div>
           </Shell>
         </nav>

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
+import { Check, Copy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import './markdown-code.css';
 
@@ -16,7 +17,7 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
     if (!code) return;
     navigator.clipboard.writeText(code).then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setTimeout(() => setCopied(false), 1800);
     });
   };
 
@@ -27,8 +28,17 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
         <button
           type="button"
           onClick={copy}
-          className="label transition-colors hover:text-text"
+          aria-label={copied ? 'Copied' : 'Copy code'}
+          className={cn(
+            'inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors',
+            copied ? 'text-accent' : 'text-text-3 hover:text-text',
+          )}
         >
+          {copied ? (
+            <Check className="size-3.5" />
+          ) : (
+            <Copy className="size-3.5" />
+          )}
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getAllContent } from '@/lib/content';
 import { Shell, Label, SectionHead } from '@/components/primitives';
@@ -185,15 +186,23 @@ export default function About() {
               Always happy to talk software, tooling, or an interesting idea.
             </p>
           </div>
-          <a
-            href="mailto:gerardalexpro@gmail.com"
-            className="group inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.02]"
-          >
-            gerardalexpro@gmail.com
-            <span className="transition-transform group-hover:translate-x-0.5">
-              →
-            </span>
-          </a>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <Link
+              to="/cv"
+              className="group inline-flex items-center gap-1.5 rounded-lg border border-line-strong px-4 py-2.5 text-sm font-semibold transition-colors hover:border-accent"
+            >
+              <span className="link-underline">View CV</span>
+            </Link>
+            <a
+              href="mailto:gerardalexpro@gmail.com"
+              className="group inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.02]"
+            >
+              gerardalexpro@gmail.com
+              <span className="transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </a>
+          </div>
         </div>
       </section>
     </Shell>
