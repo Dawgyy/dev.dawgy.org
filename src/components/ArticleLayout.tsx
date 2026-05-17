@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Shell, Label } from './primitives';
 import { PageHeader } from './PageHeader';
+import { useSeo } from '@/hooks/use-seo';
 
 const MarkdownRenderer = lazy(() =>
   import('./MarkdownRenderer').then((m) => ({ default: m.MarkdownRenderer })),
@@ -29,6 +30,8 @@ interface ArticleLayoutProps {
   eyebrow: string;
   title: string;
   description?: string;
+  /** Canonical path, e.g. "/blog/emacs" — drives SEO tags. */
+  path: string;
   meta?: MetaItem[];
   actions?: React.ReactNode;
   content: string;
@@ -38,10 +41,13 @@ export function ArticleLayout({
   eyebrow,
   title,
   description,
+  path,
   meta,
   actions,
   content,
 }: ArticleLayoutProps) {
+  useSeo({ title, description, path, type: 'article' });
+
   return (
     <Shell className="pb-8">
       <PageHeader

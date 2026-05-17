@@ -26,3 +26,9 @@ export const rowVariants: Variants = {
   initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
 };
+
+/** Estimated reading time in minutes (~200 wpm), at least 1. */
+export function readingTime(text: string): number {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}

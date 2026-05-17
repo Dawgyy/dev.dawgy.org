@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { getAllContent } from '@/lib/content';
 import { Shell, Label, SectionHead } from '@/components/primitives';
 import { EntryRow } from '@/components/EntryRow';
+import { useSeo } from '@/hooks/use-seo';
 import { listVariants, rowVariants } from '@/lib/utils';
 
 const stack = ['.NET', 'C#', 'React', 'TypeScript', 'Azure', 'SQL', 'TanStack'];
@@ -57,6 +58,8 @@ function IndexSection({
 }
 
 export default function Home() {
+  useSeo({ path: '/' });
+
   const work = getAllContent('work');
   const writing = getAllContent('blog');
   const projects = getAllContent('projects');
@@ -72,17 +75,20 @@ export default function Home() {
       >
         <motion.div variants={rowVariants}>
           <Label className="flex items-center gap-2">
-            <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-            Available for new projects
+            <span className="size-1.5 rounded-full bg-accent" />
+            Consultant @ Edda — Belgium
           </Label>
         </motion.div>
 
         <motion.h1
           variants={rowVariants}
-          className="mt-6 text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl md:text-7xl"
+          className="mt-6 text-[clamp(2.75rem,9vw,5.5rem)] font-semibold leading-[1.0] tracking-[-0.04em]"
         >
-          Alex Gerard —<br />
-          <span className="text-accent-gradient">IT Consultant</span> &amp;{' '}
+          Alex Gerard
+          <span className="ml-1 text-accent">.</span>
+          <br />
+          <span className="text-accent-gradient">IT Consultant</span>{' '}
+          <span className="text-text-3">&amp;</span>{' '}
           <span className="text-text-2">Developer</span>
         </motion.h1>
 
@@ -125,6 +131,26 @@ export default function Home() {
             ))}
           </div>
         </motion.div>
+
+        {/* stat strip */}
+        <motion.dl
+          variants={rowVariants}
+          className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-4"
+        >
+          {[
+            ['Based in', 'Belgium'],
+            ['Engagements', String(work.length)],
+            ['Projects', String(projects.length)],
+            ['Writing', String(writing.length)],
+          ].map(([k, v]) => (
+            <div key={k} className="bg-surface px-4 py-3.5">
+              <dt className="label">{k}</dt>
+              <dd className="nums mt-1 text-lg font-semibold tracking-tight">
+                {v}
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
       </motion.section>
 
       {/* ============ Index ============ */}

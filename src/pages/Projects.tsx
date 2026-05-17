@@ -3,6 +3,7 @@ import { getAllContent, type ContentData } from '@/lib/content';
 import { Shell, SectionHead } from '@/components/primitives';
 import { PageHeader } from '@/components/PageHeader';
 import { EntryRow } from '@/components/EntryRow';
+import { useSeo } from '@/hooks/use-seo';
 import { listVariants } from '@/lib/utils';
 
 /** Projects without an explicit category are treated as professional. */
@@ -71,6 +72,12 @@ export default function Projects({
       description: 'A complete index of professional and personal projects.',
     },
   }[category ?? 'All'];
+
+  useSeo({
+    title: head.title === 'Work' ? 'Work' : `${head.title} Work`,
+    path: category ? `/projects/${category.toLowerCase()}` : '/projects',
+    description: head.description,
+  });
 
   return (
     <Shell className="pb-8">

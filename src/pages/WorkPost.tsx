@@ -35,6 +35,7 @@ export default function WorkPost() {
       eyebrow="Work / 01"
       title={work.title ?? 'Untitled'}
       description={work.resume}
+      path={`/work/${slug}`}
       meta={meta}
       content={work.content}
     />
