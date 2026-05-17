@@ -1,77 +1,103 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
 
 /* ================================================================ */
-/*  SWISS DESIGN SYSTEM                                              */
-/*  Black / white / grey + a single petrol-blue accent.             */
-/*  No radius, no blur, no shadow. The grid does the work.           */
+/*  DARK-FIRST DESIGN SYSTEM                                         */
+/*  Deep near-black surfaces, luminous petrol accent, soft glow.     */
 /* ================================================================ */
 :root {
-  /* surfaces */
-  --paper: oklch(0.97 0.004 95); /* warm off-white */
-  --ink: oklch(0.17 0.006 250); /* near-black */
-  --ink-soft: oklch(0.44 0.006 250); /* secondary text */
-  --ink-faint: oklch(0.63 0.005 250); /* metadata */
-  --rule: oklch(0.84 0.004 250); /* hairlines */
-  --rule-strong: oklch(0.17 0.006 250); /* heavy rules = ink */
-  --field: oklch(0.93 0.004 95); /* inset blocks */
+  /* layered surfaces — each step slightly lighter */
+  --bg: oklch(0.18 0.006 230);
+  --bg-2: oklch(0.21 0.008 230);
+  --surface: oklch(0.235 0.009 230);
+  --surface-2: oklch(0.27 0.01 230);
+  --line: oklch(1 0 0 / 0.08);
+  --line-strong: oklch(1 0 0 / 0.14);
 
-  /* the one accent — petrol blue */
-  --accent: oklch(0.52 0.072 215);
-  --accent-ink: oklch(0.97 0.004 95);
+  /* text */
+  --text: oklch(0.97 0.003 230);
+  --text-2: oklch(0.74 0.008 230);
+  --text-3: oklch(0.56 0.01 230);
+
+  /* the accent — luminous petrol blue */
+  --accent: oklch(0.74 0.13 205);
+  --accent-deep: oklch(0.62 0.13 210);
+  --accent-ink: oklch(0.16 0.02 220);
+  --accent-glow: oklch(0.74 0.13 205 / 0.16);
 }
 
-.dark {
-  --paper: oklch(0.18 0.006 250);
-  --ink: oklch(0.94 0.003 250);
-  --ink-soft: oklch(0.68 0.006 250);
-  --ink-faint: oklch(0.5 0.006 250);
-  --rule: oklch(0.32 0.006 250);
-  --rule-strong: oklch(0.94 0.003 250);
-  --field: oklch(0.22 0.006 250);
+/* light variant — kept available via the toggle */
+.light {
+  --bg: oklch(0.98 0.004 230);
+  --bg-2: oklch(0.96 0.005 230);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.975 0.004 230);
+  --line: oklch(0.2 0.02 230 / 0.1);
+  --line-strong: oklch(0.2 0.02 230 / 0.18);
 
-  --accent: oklch(0.66 0.085 210);
-  --accent-ink: oklch(0.16 0.006 250);
+  --text: oklch(0.22 0.01 230);
+  --text-2: oklch(0.44 0.012 230);
+  --text-3: oklch(0.6 0.012 230);
+
+  --accent: oklch(0.55 0.13 215);
+  --accent-deep: oklch(0.48 0.13 218);
+  --accent-ink: oklch(0.99 0.004 230);
+  --accent-glow: oklch(0.55 0.13 215 / 0.12);
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-ink-faint: var(--ink-faint);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-field: var(--field);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
   --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-ink: var(--accent-ink);
 
-  /* one grotesk family, contrasted weights */
   --font-sans: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
+  --radius-card: 14px;
+
   --default-transition-duration: 200ms;
-  --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-drift: drift 22s ease-in-out infinite alternate;
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(3%, -4%, 0) scale(1.15);
+    }
+  }
 }
 
 /* ---------------------------------------------------------------- */
 @layer base {
   * {
-    border-color: var(--color-rule);
+    border-color: var(--color-line);
     min-width: 0;
   }
 
   html {
+    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-bg);
+    color: var(--color-text);
     font-family: var(--font-sans);
-    font-feature-settings: 'ss01', 'cv05', 'tnum';
+    font-feature-settings: 'ss01', 'cv05';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -85,56 +111,102 @@
   h1,
   h2,
   h3 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
 
-  /* Square, minimal scrollbar */
   ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-rule);
-    border: 4px solid var(--color-paper);
+    background: var(--color-line-strong);
+    border-radius: 9999px;
+    border: 3px solid var(--color-bg);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ink-faint);
+    background: var(--color-text-3);
   }
 }
 
 @layer utilities {
-  /* uppercase mono label used for metadata everywhere */
+  /* uppercase mono metadata label */
   .label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     line-height: 1;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-ink-faint);
+    color: var(--color-text-3);
   }
 
-  /* tabular slashed-zero numerals for indices */
   .nums {
     font-variant-numeric: tabular-nums slashed-zero;
   }
 
-  /* the signature: an underline that draws in on hover */
+  /* gradient text for emphasis words */
+  .text-accent-gradient {
+    background-image: linear-gradient(
+      120deg,
+      var(--color-accent),
+      var(--color-text)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* the spotlight card surface */
+  .card {
+    position: relative;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    transition:
+      border-color 0.25s,
+      background-color 0.25s,
+      transform 0.25s;
+  }
+  /* accent ring revealed by the cursor spotlight (set via JS vars) */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 50%),
+      var(--color-accent),
+      transparent 60%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  /* underline that draws in on hover */
   .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
     background-position: 0 100%;
     background-repeat: no-repeat;
-    background-size: 0% 1px;
-    transition: background-size 0.3s cubic-bezier(0.2, 0, 0, 1);
+    background-size: 0% 1.5px;
+    transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: 1px;
   }
   .link-underline:hover,
-  a:hover > .link-underline,
   .group:hover .link-underline {
-    background-size: 100% 1px;
+    background-size: 100% 1.5px;
   }
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -1,12 +1,12 @@
-/* Syntax highlighting — themed to the swiss palette, light + dark. */
+/* Syntax highlighting — themed to the design tokens, light + dark. */
 .hljs {
-  color: var(--color-ink);
+  color: var(--color-text);
   background: transparent;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: var(--color-ink-faint);
+  color: var(--color-text-3);
   font-style: italic;
 }
 
@@ -23,7 +23,7 @@
 .hljs-attr,
 .hljs-template-tag,
 .hljs-addition {
-  color: var(--color-ink-soft);
+  color: var(--color-text-2);
 }
 
 .hljs-title,
@@ -34,12 +34,12 @@
 .hljs-bullet,
 .hljs-built_in,
 .hljs-number {
-  color: var(--color-ink);
+  color: var(--color-text);
   font-weight: 500;
 }
 
 .hljs-deletion {
-  color: var(--color-ink-faint);
+  color: var(--color-text-3);
   text-decoration: line-through;
 }
 

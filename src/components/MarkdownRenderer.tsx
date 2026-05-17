@@ -21,18 +21,21 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   };
 
   return (
-    <div className="code-block group relative my-6 border border-rule">
-      <div className="flex items-center justify-between border-b border-rule bg-field px-3 py-1.5">
+    <div className="code-block group relative my-6 overflow-hidden rounded-xl border border-line">
+      <div className="flex items-center justify-between border-b border-line bg-surface-2 px-3 py-1.5">
         <span className="label">Source</span>
         <button
           type="button"
           onClick={copy}
-          className="label transition-colors hover:text-ink"
+          className="label transition-colors hover:text-text"
         >
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed" {...props}>
+      <pre
+        className="overflow-x-auto bg-bg-2 p-4 text-sm leading-relaxed"
+        {...props}
+      >
         {children}
       </pre>
     </div>
@@ -50,19 +53,19 @@ export function MarkdownRenderer({
     <div
       className={cn(
         'prose max-w-none',
-        // typography tuned to the swiss system
-        'prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink',
-        'prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-rule',
-        'prose-h3:text-base prose-h3:uppercase prose-h3:tracking-wide prose-h3:text-ink-soft',
-        'prose-p:text-ink-soft prose-p:leading-relaxed prose-li:text-ink-soft',
-        'prose-strong:text-ink prose-strong:font-semibold',
-        'prose-a:text-ink prose-a:font-medium prose-a:underline prose-a:decoration-accent prose-a:underline-offset-[3px] hover:prose-a:text-accent',
-        'prose-code:font-mono prose-code:text-[0.85em] prose-code:text-ink prose-code:bg-field prose-code:px-1 prose-code:py-0.5 prose-code:before:content-[""] prose-code:after:content-[""]',
+        'prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-text',
+        'prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-12 prose-h2:pb-2 prose-h2:border-b prose-h2:border-line',
+        'prose-h3:text-base prose-h3:uppercase prose-h3:tracking-wide prose-h3:text-text-2',
+        'prose-p:text-text-2 prose-p:leading-relaxed prose-li:text-text-2',
+        'prose-strong:text-text prose-strong:font-semibold',
+        'prose-a:text-text prose-a:font-medium prose-a:underline prose-a:decoration-accent prose-a:underline-offset-[3px] hover:prose-a:text-accent',
+        'prose-code:font-mono prose-code:text-[0.85em] prose-code:text-text prose-code:bg-surface-2 prose-code:rounded prose-code:px-1 prose-code:py-0.5 prose-code:before:content-[""] prose-code:after:content-[""]',
         'prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0',
-        'prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:not-italic prose-blockquote:text-ink-soft prose-blockquote:font-normal',
-        'prose-img:border prose-img:border-rule',
-        'prose-hr:border-rule',
-        'prose-li:marker:text-ink-faint',
+        'prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:not-italic prose-blockquote:text-text-2 prose-blockquote:font-normal',
+        'prose-img:rounded-xl prose-img:border prose-img:border-line',
+        'prose-hr:border-line',
+        'prose-li:marker:text-text-3',
+        'prose-th:text-text prose-td:text-text-2',
         className,
       )}
     >

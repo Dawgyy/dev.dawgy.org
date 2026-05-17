@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Shell, Grid, Rule, Label } from './primitives';
+import { Shell, Label } from './primitives';
 import { PageHeader } from './PageHeader';
 
 const MarkdownRenderer = lazy(() =>
@@ -10,7 +10,11 @@ function MarkdownSkeleton() {
   return (
     <div className="space-y-3" aria-hidden>
       {[92, 78, 85, 60, 80].map((w, i) => (
-        <div key={i} className="h-3.5 bg-field" style={{ width: `${w}%` }} />
+        <div
+          key={i}
+          className="h-3.5 rounded bg-surface-2"
+          style={{ width: `${w}%` }}
+        />
       ))}
     </div>
   );
@@ -22,8 +26,7 @@ interface MetaItem {
 }
 
 interface ArticleLayoutProps {
-  index: string;
-  kind: string;
+  eyebrow: string;
   title: string;
   description?: string;
   meta?: MetaItem[];
@@ -32,8 +35,7 @@ interface ArticleLayoutProps {
 }
 
 export function ArticleLayout({
-  index,
-  kind,
+  eyebrow,
   title,
   description,
   meta,
@@ -41,48 +43,35 @@ export function ArticleLayout({
   content,
 }: ArticleLayoutProps) {
   return (
-    <Shell>
+    <Shell className="pb-8">
       <PageHeader
-        index={`${index} — ${kind}`}
+        eyebrow={eyebrow}
         title={title}
         description={description}
         back
       />
 
-      {/* Meta table — key/value rows under hairlines */}
+      {/* Meta panel */}
       {meta && meta.length > 0 && (
-        <Grid className="py-3">
+        <div className="card mt-8 grid grid-cols-2 gap-px overflow-hidden bg-line sm:grid-cols-4">
           {meta.map((m) => (
-            <div
-              key={m.label}
-              className="col-span-2 border-t border-rule pt-3 md:col-span-3"
-            >
+            <div key={m.label} className="bg-surface p-4">
               <Label className="block">{m.label}</Label>
               <p className="mt-1.5 text-sm font-medium leading-snug">
                 {m.value}
               </p>
             </div>
           ))}
-        </Grid>
+        </div>
       )}
 
-      {actions && (
-        <>
-          <Rule />
-          <div className="flex flex-wrap gap-3 py-4">{actions}</div>
-        </>
-      )}
+      {actions && <div className="mt-6 flex flex-wrap gap-3">{actions}</div>}
 
-      <Rule weight="heavy" />
-
-      {/* Body — offset into the grid like a print column */}
-      <Grid className="py-12">
-        <article className="col-span-4 md:col-span-8 md:col-start-3">
-          <Suspense fallback={<MarkdownSkeleton />}>
-            <MarkdownRenderer content={content} />
-          </Suspense>
-        </article>
-      </Grid>
+      <div className="mx-auto mt-12 max-w-2xl">
+        <Suspense fallback={<MarkdownSkeleton />}>
+          <MarkdownRenderer content={content} />
+        </Suspense>
+      </div>
     </Shell>
   );
 }

@@ -12,13 +12,14 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const STORAGE_KEY = 'theme';
 
+/** Dark is the default; light is the opt-in variant. */
 function getInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'dark';
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  return window.matchMedia('(prefers-color-scheme: light)').matches
+    ? 'light'
+    : 'dark';
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -26,7 +27,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.toggle('dark', theme === 'dark');
+    root.classList.toggle('light', theme === 'light');
     root.style.colorScheme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);

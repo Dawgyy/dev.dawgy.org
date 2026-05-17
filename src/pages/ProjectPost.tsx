@@ -32,8 +32,7 @@ export default function ProjectPost() {
 
   return (
     <ArticleLayout
-      index="01"
-      kind={project.category === 'Personal' ? 'Personal' : 'Project'}
+      eyebrow={project.category === 'Personal' ? 'Personal / 03' : 'Work / 01'}
       title={project.title ?? 'Untitled'}
       description={project.resume}
       meta={meta}
@@ -44,10 +43,10 @@ export default function ProjectPost() {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 border border-rule-strong px-3 py-1.5 text-sm font-medium"
+              className="group inline-flex items-center gap-1.5 rounded-lg border border-line-strong px-3.5 py-2 text-sm font-medium transition-colors hover:border-accent"
             >
               <span className="link-underline">Repository</span>
-              <span className="text-ink-faint">↗</span>
+              <span className="text-text-3 group-hover:text-accent">↗</span>
             </a>
           )}
           {project.demo && (
@@ -55,7 +54,7 @@ export default function ProjectPost() {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 bg-ink px-3 py-1.5 text-sm font-medium text-paper"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.02]"
             >
               Live demo <span aria-hidden>↗</span>
             </a>
